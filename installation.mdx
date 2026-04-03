@@ -1,0 +1,115 @@
+---
+title: "Installation"
+description: "Install Unigram on Windows 10 or Windows 11 from the Microsoft Store, a direct download, or the beta channel."
+---
+
+## System requirements
+
+Unigram is a Universal Windows Platform (UWP) app. Before installing, confirm your device meets these requirements:
+
+| Requirement | Minimum |
+|---|---|
+| Operating system | Windows 10 (any edition) or Windows 11 |
+| Platform | x86, x64, or ARM64 |
+| Internet connection | Required for sign-in and messaging |
+
+<Note>
+  Windows 10 N and Windows 10 KN editions ship without the Media Feature Pack. You must install it separately before Unigram can play audio and video. See [Windows 10 N](#windows-10-n) below.
+</Note>
+
+## Install from the Microsoft Store
+
+The Microsoft Store is the recommended installation method. The Store handles automatic updates and app integrity verification.
+
+<Steps>
+  <Step title="Open the Store listing">
+    Visit the [Unigram page on the Microsoft Store](https://apps.microsoft.com/detail/9n97zckpd60q) or search for **Unigram** inside the Microsoft Store app.
+  </Step>
+  <Step title="Install the app">
+    Click **Get** or **Install**. The Store downloads and installs Unigram automatically.
+  </Step>
+  <Step title="Launch Unigram">
+    Click **Open** in the Store, or find **Telegram** (Unigram's display name) in the Start menu.
+  </Step>
+</Steps>
+
+## Install via direct download
+
+If you prefer not to use the Microsoft Store, you can install Unigram directly from a signed `.msixbundle` package published on GitHub Releases.
+
+<Steps>
+  <Step title="Download the package">
+    Go to the [Unigram Releases page on GitHub](https://github.com/UnigramDev/Unigram/releases) and download the latest `.msixbundle` file from the **Assets** section of the most recent stable release.
+  </Step>
+  <Step title="Trust the certificate">
+    The first time you install a sideloaded app, Windows may ask you to trust the publisher certificate included in the release. Open the `.msixbundle` file and follow the prompts in the **App Installer**.
+  </Step>
+  <Step title="Complete installation">
+    Click **Install** in the App Installer dialog. Windows installs the package and adds Unigram to your Start menu.
+  </Step>
+</Steps>
+
+<Tip>
+  Direct downloads give you the same signed build published to the Store. The only difference is that the Store manages updates automatically, while direct installs require you to repeat this process when a new release is available.
+</Tip>
+
+## Install beta versions
+
+Beta releases include new features and bug fixes before they reach the stable channel. The beta is distributed as a `.msixbundle` through the official Telegram channel.
+
+<Steps>
+  <Step title="Join the beta channel">
+    Open the [Unigram beta channel](https://t.me/unigramappx) on Telegram. Read the pinned message carefully — it contains important installation instructions specific to the current beta build.
+  </Step>
+  <Step title="Download the beta package">
+    Download the `.msixbundle` file attached to the latest post in the channel.
+  </Step>
+  <Step title="Install the package">
+    Open the downloaded file. The **App Installer** will detect any existing Unigram installation and offer to update it. Click **Update** or **Install** to proceed.
+  </Step>
+</Steps>
+
+<Warning>
+  Beta versions may contain bugs or unfinished features. Back up any important local data before upgrading, and be aware that beta builds may not be fully stable.
+</Warning>
+
+## Windows 10 N
+
+Windows 10 N and Windows 10 KN are regional editions that omit the Windows Media Feature Pack. Without it, Unigram cannot decode audio or video content.
+
+<Steps>
+  <Step title="Open Windows Settings">
+    Press **Win + I** to open **Settings**, then go to **Apps**.
+  </Step>
+  <Step title="Navigate to optional features">
+    Select **Apps & features**, then click **Optional features** (on Windows 10) or **Add an optional feature** (on Windows 11).
+  </Step>
+  <Step title="Add the Media Feature Pack">
+    Click **Add a feature**, search for **Media Feature Pack**, select it, and click **Install**.
+  </Step>
+  <Step title="Restart your device">
+    After installation completes, restart Windows to activate the media components.
+  </Step>
+</Steps>
+
+Once the Media Feature Pack is installed, Unigram can play voice messages, video files, and streaming media normally.
+
+## Updating Unigram
+
+<Tabs>
+  <Tab title="Microsoft Store">
+    The Store updates Unigram automatically in the background. To trigger an update immediately:
+
+    1. Open the **Microsoft Store** app.
+    2. Click **Library** (bottom-left).
+    3. Click **Get updates**.
+
+    Unigram will appear in the update queue if a new version is available.
+  </Tab>
+  <Tab title="Direct download">
+    To update a directly installed build, download the new `.msixbundle` from [GitHub Releases](https://github.com/UnigramDev/Unigram/releases) and run it. The **App Installer** detects the existing installation and replaces it with the newer version.
+  </Tab>
+  <Tab title="Beta">
+    To update a beta build, download the latest `.msixbundle` from the [Unigram beta channel](https://t.me/unigramappx) and run it as described in the installation steps above.
+  </Tab>
+</Tabs>

@@ -1,0 +1,107 @@
+{
+  "projectType": "saas",
+  "projectName": "Unigram",
+  "projectDescription": "Unigram is a Telegram client for Windows built on UWP, offering a native Windows experience with support for secret chats, voice/video calls, and the full Telegram feature set.",
+  "theme": "almond",
+  "primaryColor": "#04a4ec",
+  "lightColor": "#d1960e",
+  "darkColor": "#fc5c2c",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "User Guide",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "introduction",
+              "installation",
+              "getting-started/account-setup"
+            ]
+          },
+          {
+            "group": "Core Features",
+            "pages": [
+              "features/messaging",
+              "features/calls",
+              "features/media-sharing",
+              "features/folders-and-chats"
+            ]
+          },
+          {
+            "group": "Privacy & Security",
+            "pages": [
+              "privacy/secret-chats",
+              "privacy/passcode-and-lock",
+              "privacy/privacy-settings"
+            ]
+          },
+          {
+            "group": "Customization",
+            "pages": [
+              "customization/themes-and-appearance",
+              "customization/notifications",
+              "customization/keyboard-shortcuts"
+            ]
+          },
+          {
+            "group": "Advanced",
+            "pages": [
+              "advanced/proxy-and-network",
+              "advanced/data-and-storage",
+              "advanced/beta-and-updates"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Contributing",
+        "groups": [
+          {
+            "group": "Development Setup",
+            "pages": [
+              "contributing/build-instructions",
+              "contributing/dependencies",
+              "contributing/tdlib-setup"
+            ]
+          },
+          {
+            "group": "Guidelines",
+            "pages": [
+              "contributing/how-to-contribute",
+              "contributing/translations"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Full Telegram MTProto protocol support via TDLib",
+    "End-to-end encrypted secret chats",
+    "Voice and video calls powered by WebRTC (tgcalls)",
+    "Group video calls and live streams",
+    "Chat folders and organization",
+    "Telegram Premium features (4GB uploads, custom emoji, voice-to-text)",
+    "Multi-account support",
+    "Native Windows UWP app with Fluent Design",
+    "28 built-in languages with Telegram Translations platform support",
+    "Proxy and network configuration (MTProxy, SOCKS5)",
+    "Passcode lock and privacy controls",
+    "Customizable themes including night mode",
+    "Instant View for articles",
+    "Stickers, GIFs, and animated emoji"
+  ],
+  "publicApiSurface": [
+    "TDLib Client API (Telegram/Td/Client.cs)",
+    "VoipService — voice and video call management (Services/Calls/VoipService.cs)",
+    "ClientService — core Telegram API operations (Services/ClientService.cs)",
+    "SettingsService — app settings and preferences (Services/SettingsService.cs)",
+    "NotificationsService — push notification handling (Services/NotificationsService.cs)",
+    "PlaybackService — media playback (Services/PlaybackService.cs)",
+    "ThemeService — UI theme management (Services/ThemeService.cs)",
+    "LocaleService — localization (Services/LocaleService.cs)",
+    "ProxyService — proxy configuration (Services/ProxyService.cs)",
+    "StorageService — file and storage management (Services/StorageService.cs)"
+  ]
+}

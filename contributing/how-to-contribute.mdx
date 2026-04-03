@@ -1,0 +1,111 @@
+---
+title: "How to contribute"
+description: "Learn how to report bugs, request features, submit pull requests, and participate in the Unigram community."
+---
+
+Unigram welcomes contributions from the community. Before you start, read this guide so your effort lands in the right place and reaches the right people.
+
+<Note>
+  The most important rule: **ask before you build.** Join the [Unigram Insiders group on Telegram](https://t.me/unigraminsiders) and discuss your idea before opening a pull request. This saves you from investing time in a change the maintainers can't merge.
+</Note>
+
+## Ways to contribute
+
+<CardGroup cols={2}>
+  <Card title="Report a bug" icon="bug">
+    File bugs at [bugs.telegram.org](https://bugs.telegram.org/), not on GitHub.
+  </Card>
+  <Card title="Request a feature" icon="lightbulb">
+    Discuss ideas in the Insiders group before submitting anywhere.
+  </Card>
+  <Card title="Submit a pull request" icon="code-pull-request">
+    Ask first, get agreement, then open a PR linked to the discussion.
+  </Card>
+  <Card title="Improve translations" icon="language">
+    Translate or refine strings at [translations.telegram.org](https://translations.telegram.org/en/Unigram).
+  </Card>
+</CardGroup>
+
+## Reporting bugs
+
+Unigram uses the Telegram bug tracker, not GitHub issues, for most bugs.
+
+<Steps>
+  <Step title="Check for an existing report">
+    Search [bugs.telegram.org](https://bugs.telegram.org/) to see whether the bug has already been filed. Add your information as a comment if it has.
+  </Step>
+  <Step title="Gather details">
+    Collect your Unigram version (visible under **Settings → About**), your Windows version, and the exact steps that reproduce the problem.
+  </Step>
+  <Step title="File the report">
+    Open a new report at [bugs.telegram.org](https://bugs.telegram.org/) under the Unigram category. Include reproduction steps, expected behavior, actual behavior, and any relevant screenshots or logs.
+  </Step>
+</Steps>
+
+<Warning>
+  Do not open GitHub issues for general bugs. GitHub issues are reserved for tracking work that maintainers have already agreed to act on.
+</Warning>
+
+## Requesting features
+
+Feature requests go through the community first, not directly into a tracker.
+
+<Steps>
+  <Step title="Join the Insiders group">
+    Join the [Unigram Insiders group on Telegram](https://t.me/unigraminsiders). This is where the team and community discuss the direction of the app.
+  </Step>
+  <Step title="Search previous discussions">
+    Scroll back or use Telegram's search to check whether your idea has already been discussed. If it has, add your perspective to the existing thread.
+  </Step>
+  <Step title="Start a discussion">
+    Post your feature idea clearly: describe the problem it solves, how you imagine it working, and why it belongs in a native Windows Telegram client.
+  </Step>
+  <Step title="Wait for consensus">
+    Give the team and community time to respond. Maintainers will indicate whether the feature fits Unigram's roadmap before you spend time on implementation.
+  </Step>
+</Steps>
+
+## Opening a pull request
+
+<Steps>
+  <Step title="Get agreement first">
+    Before writing any code, confirm in the [Insiders group](https://t.me/unigraminsiders) that the maintainers want the change. Explain what you plan to do and how you plan to do it.
+  </Step>
+  <Step title="Fork and branch">
+    Fork the [Unigram repository](https://github.com/UnigramDev/Unigram) on GitHub and create a descriptive branch name for your change.
+  </Step>
+  <Step title="Follow the build instructions">
+    Set up your local environment using the [build instructions](/contributing/build-instructions) before making changes.
+  </Step>
+  <Step title="Make focused changes">
+    Keep your pull request scoped to a single feature or fix. Unrelated changes in the same PR slow down review and make it harder to isolate problems.
+  </Step>
+  <Step title="Open the PR and link the discussion">
+    Open a pull request against the `develop` branch. In the PR description, link directly to the Insiders group discussion or issue where the change was agreed upon.
+  </Step>
+</Steps>
+
+<Tip>
+  Small, focused pull requests get reviewed and merged faster than large ones. If a feature is complex, ask whether the maintainers prefer it broken into multiple PRs.
+</Tip>
+
+## Licensing
+
+Unigram is released under the [GNU General Public License v3.0](https://github.com/UnigramDev/Unigram/blob/develop/LICENSE). By submitting a pull request, you agree to license your contribution under the same GPL-3.0 terms. You retain copyright over your own code, but grant the project the right to distribute it under GPL-3.0.
+
+<Warning>
+  Do not include code taken from projects with incompatible licenses. If you're unsure whether a dependency or snippet is compatible with GPL-3.0, ask in the Insiders group before submitting.
+</Warning>
+
+## Code of conduct
+
+Unigram follows the [Contributor Covenant](http://contributor-covenant.org/version/1/4/) code of conduct. All participants — in code, issues, the Insiders group, or any other project space — are expected to:
+
+- Use welcoming and inclusive language
+- Respect differing viewpoints and experiences
+- Accept constructive criticism gracefully
+- Focus on what is best for the community
+
+Unacceptable behavior includes harassment, personal attacks, publishing others' private information without permission, and any conduct that would be inappropriate in a professional setting.
+
+Report violations to the project team at **team@unigram.me**. Maintainers will review and investigate all complaints with confidentiality.

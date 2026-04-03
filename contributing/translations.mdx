@@ -1,0 +1,125 @@
+---
+title: "Translations"
+description: "Help translate Unigram into your language using the Telegram translations platform."
+---
+
+Unigram ships with 28 built-in languages and supports an unlimited number of additional community language packs through Telegram's translations platform. You don't need to touch the source code or open a pull request — all translation work happens on the web.
+
+<Note>
+  Translation contributions go to [translations.telegram.org/en/Unigram](https://translations.telegram.org/en/Unigram), not to GitHub. The maintainers periodically pull approved translations into the app.
+</Note>
+
+## Improving an existing translation
+
+If you notice incorrect, outdated, or missing strings in a language that Unigram already supports, you can suggest corrections directly on the platform.
+
+<Steps>
+  <Step title="Create a Telegram account">
+    You need a Telegram account to access the translations platform. If you already use Unigram, you have one.
+  </Step>
+  <Step title="Open the Unigram translation project">
+    Go to [translations.telegram.org/en/Unigram](https://translations.telegram.org/en/Unigram) and sign in with your Telegram account.
+  </Step>
+  <Step title="Select your language">
+    Browse the list of available languages and open the one you want to work on. You'll see a list of strings with their current translations and status.
+  </Step>
+  <Step title="Suggest corrections">
+    Click any string to open the translation editor. Type your improved translation and submit it. Other translators and language reviewers can then vote on or approve your suggestion.
+  </Step>
+</Steps>
+
+<Tip>
+  Focus on strings marked as **unverified** or **outdated** first — these are the ones most likely to reach users in a wrong or missing state.
+</Tip>
+
+## Adding a new language
+
+If your language isn't listed in the project, you can start a new translation from scratch.
+
+<Steps>
+  <Step title="Sign in to the translations platform">
+    Go to [translations.telegram.org/en/Unigram](https://translations.telegram.org/en/Unigram) and sign in.
+  </Step>
+  <Step title="Request a new language">
+    Use the **Add language** option on the Unigram project page to request your language. The platform will create a new language pack pre-populated with the English source strings.
+  </Step>
+  <Step title="Translate the strings">
+    Work through the string list systematically. Prioritize the most frequently seen strings — labels, buttons, and error messages — before moving to longer descriptive text.
+  </Step>
+  <Step title="Recruit other speakers">
+    Share the language pack link with other native speakers so they can review and vote on your translations. A language pack with multiple reviewers reaches users faster.
+  </Step>
+</Steps>
+
+## How translations get merged into the app
+
+Translations don't require a pull request. Here's how they flow from the platform into Unigram:
+
+1. You submit a translation suggestion on [translations.telegram.org](https://translations.telegram.org/en/Unigram).
+2. Language reviewers and other translators approve or refine the suggestion.
+3. Unigram's maintainers periodically sync approved translations into the app's built-in language packs.
+4. Users on the Telegram translations platform can also install any language pack directly through **Settings → Language** without waiting for a new app release.
+
+<Note>
+  The 28 built-in languages are bundled with the app and update with each release. All other language packs are downloaded on demand from Telegram's servers and can update independently of the app version.
+</Note>
+
+## String format conventions
+
+Understanding how strings are structured helps you write translations that display correctly in the app.
+
+### Positional placeholders
+
+Strings use `{0}`, `{1}`, etc. to mark where the app inserts dynamic values at runtime. Preserve these placeholders exactly — including the curly braces and number — and reorder them only if your language requires a different word order.
+
+```
+English: Viewed {0} time
+German:  {0} Mal angesehen
+```
+
+```
+English: {0} person reacted with {1}
+French:  {0} personne a réagi avec {1}
+```
+
+### Named entity placeholders
+
+Some action strings use `un1` and `un2` in place of user names. These are substituted with formatted, tappable names at display time. Treat them as opaque tokens — copy them verbatim into your translation.
+
+```
+English: un1 added un2
+Russian: un1 добавил(а) un2
+```
+
+### Plural forms
+
+Strings that vary by quantity are split into separate keys with a suffix indicating the plural category: `_zero`, `_one`, `_two`, `_few`, `_many`, and `_other`. The platform shows you which forms apply to your language according to CLDR plural rules.
+
+| Suffix   | Used for                               |
+|----------|----------------------------------------|
+| `_zero`  | Quantity = 0 in languages that need it |
+| `_one`   | Singular (1 item)                      |
+| `_two`   | Dual (2 items) in Arabic and others    |
+| `_few`   | Small numbers in Slavic languages      |
+| `_many`  | Large numbers in some languages        |
+| `_other` | Default / catch-all form               |
+
+```
+AccDescrMentionCount_one   → {0} mention
+AccDescrMentionCount_other → {0} mentions
+```
+
+For a language like Russian with four plural forms, you would fill in `_one`, `_few`, `_many`, and `_other`. English only requires `_one` and `_other`. The translations platform shows you exactly which forms your language needs.
+
+<Warning>
+  Do not leave a plural form empty if your language requires it. A missing form causes the app to fall back to English for that specific quantity.
+</Warning>
+
+### Markdown-style emphasis
+
+Some strings use `**double asterisks**` for bold text. The app renders this as bold at display time. Keep the `**` markers around the same words in your translation.
+
+```
+English: While **Telegram Premium** is a paid option...
+Spanish: Si bien **Telegram Premium** es una opción de pago...
+```

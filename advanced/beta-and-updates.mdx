@@ -1,0 +1,130 @@
+---
+title: 'Beta and updates'
+description: 'Keep Unigram up to date via the Microsoft Store, install beta builds from the Telegram channel, and collect diagnostic logs for bug reports.'
+---
+
+Unigram is distributed through three channels: the Microsoft Store (stable), direct download (GitHub Releases), and a Telegram beta channel. Each channel has different update mechanics and stability guarantees.
+
+## Stable releases — Microsoft Store
+
+The Microsoft Store build is the recommended installation for most users.
+
+- **App ID**: `9n97zckpd60q`
+- **Auto-updates**: Windows Update delivers new versions automatically. You can also trigger an update check manually from the Microsoft Store app.
+- The Store build runs in a sandboxed UWP container. Auto-download of beta packages is disabled in Store builds — updates come only through the Store.
+
+<Tip>
+  If you installed Unigram from the Store and updates seem to have stopped, open the **Microsoft Store** app, go to **Library**, and tap **Get updates**.
+</Tip>
+
+## Direct download releases — GitHub Releases
+
+Pre-packaged `.msixbundle` files are published for every release at [github.com/UnigramDev/Unigram/releases](https://github.com/UnigramDev/Unigram/releases).
+
+<Steps>
+  <Step title="Download the bundle">
+    Go to the Releases page and download the `.msixbundle` file from the latest release.
+  </Step>
+  <Step title="Install with App Installer">
+    Double-click the downloaded file. Windows App Installer opens and handles the installation. Future updates downloaded from the same channel are applied using the same method.
+  </Step>
+</Steps>
+
+In direct-download builds, Unigram periodically checks for newer packages and can install them automatically in the background. If automatic installation fails, it falls back to opening the file with App Installer.
+
+## Beta program
+
+Beta builds ship new features and fixes several weeks before the stable release.
+
+<Steps>
+  <Step title="Join the beta channel">
+    Open [t.me/unigramappx](https://t.me/unigramappx) in Telegram or a web browser.
+  </Step>
+  <Step title="Read the first message">
+    The pinned message contains specific installation instructions, including any certificates you may need to trust before installing.
+  </Step>
+  <Step title="Download the latest .msixbundle">
+    Find the most recent message containing a `.msixbundle` file and download it.
+  </Step>
+  <Step title="Install">
+    Double-click the downloaded file. App Installer walks you through the process. If prompted, allow the installation of packages from that publisher.
+  </Step>
+</Steps>
+
+<Warning>
+  Beta builds may contain bugs or incomplete features. Back up your data before installing a beta if you rely on Unigram as your primary Telegram client.
+</Warning>
+
+## Insiders group
+
+[t.me/unigraminsiders](https://t.me/unigraminsiders) is the Unigram community group for announcements, early previews, and discussions about upcoming features. Join it to follow development, ask questions, and share feedback directly with the team.
+
+## Changelogs
+
+Release notes are published in two places:
+
+- [t.me/unigram](https://t.me/unigram) — the official Unigram News channel.
+- [github.com/UnigramDev/Unigram/releases](https://github.com/UnigramDev/Unigram/releases) — the GitHub Releases page.
+
+## Reporting bugs
+
+Report bugs and request features at [bugs.telegram.org](https://bugs.telegram.org/). Before filing a report, search for existing issues to avoid duplicates. Include the Unigram version number, your Windows version, and steps to reproduce the problem.
+
+## Diagnostic logs
+
+When filing a bug report you may be asked to attach a TDLib log file.
+
+### Opening diagnostic settings
+
+<Tabs>
+  <Tab title="While signed in">
+    Open the hamburger menu, tap **Settings**, then tap the app version number **10 times** in rapid succession. The **Diagnostics** screen opens.
+  </Tab>
+  <Tab title="While signed out">
+    On the sign-in screen, tap the app version number **10 times**. The **Diagnostics** screen opens without requiring an account.
+  </Tab>
+</Tabs>
+
+### Enabling verbose logging
+
+<Steps>
+  <Step title="Open Diagnostics">
+    Follow the steps above to reach the Diagnostics screen.
+  </Step>
+  <Step title="Set verbosity to Debug">
+    Under **TDLib logs**, tap **Verbosity level** and select **Debug**. Unigram starts writing detailed logs immediately.
+  </Step>
+  <Step title="Reproduce the issue">
+    Perform whatever action causes the problem so that it is captured in the log.
+  </Step>
+  <Step title="Lower verbosity and send the log">
+    Set **Verbosity level** back to **Error**. Tap the **tdlib_log.txt** item below it. A chat picker opens — select the recipient (Telegram Support or [@tdlib_bot](https://t.me/tdlib_bot)) to send the file.
+  </Step>
+</Steps>
+
+<Warning>
+  Never send log files to unknown contacts. Logs can contain message content and contact information. Send them only to Telegram Support (via **Settings** > **Ask a Question**) or [@tdlib_bot](https://t.me/tdlib_bot).
+</Warning>
+
+### Finding the log file manually
+
+If you are signed out and cannot send the log from inside the app, locate the file directly on disk using **Windows + R** and pasting the path:
+
+<Tabs>
+  <Tab title="Microsoft Store build">
+    ```text
+    %LOCALAPPDATA%\Packages\38833FF26BA1D.UnigramPreview_g9c9v27vpyspw\LocalState
+    ```
+  </Tab>
+  <Tab title="Direct download / sideloaded build">
+    ```text
+    %LOCALAPPDATA%\Packages\TelegramFZ-LLC.Unigram_1vfw5zm9jmzqy\LocalState
+    ```
+  </Tab>
+</Tabs>
+
+The file you need is **tdlib_log.txt** inside the `LocalState` folder. Attach it to your bug report or send it to the support contact who requested it.
+
+### Disabling the Package Manager updater
+
+If Unigram's built-in update installer causes problems — for example, a failed deployment that prevents startup — you can disable it from **Diagnostics** by enabling **Disable Package Manager**. With this option on, Unigram falls back to App Installer for future updates.

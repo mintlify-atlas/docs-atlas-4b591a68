@@ -1,0 +1,134 @@
+---
+title: "Passcode and lock"
+description: "Lock Unigram with a PIN or custom passcode, enable Windows Hello biometrics, manage passkeys, and set up two-step verification for your Telegram account."
+---
+
+Unigram provides two independent layers of protection: a **passcode** that locks the app on your device, and **two-step verification** that secures your Telegram account in the cloud. These serve different purposes and can be used together.
+
+<CardGroup cols={2}>
+  <Card title="Passcode" icon="lock-keyhole">
+    Locks the Unigram app on this device. Does not affect your account or other devices.
+  </Card>
+  <Card title="Two-step verification" icon="shield-check">
+    Adds a cloud password to your Telegram account, required when logging in from any new device.
+  </Card>
+</CardGroup>
+
+## Setting up a passcode
+
+<Steps>
+  <Step title="Open Passcode settings">
+    Go to **Settings** → **Privacy and Security** → **Passcode**. If no passcode is set, you will be prompted to create one.
+  </Step>
+  <Step title="Choose passcode type">
+    Select **Simple passcode** (a 4-digit PIN) or switch to a custom alphanumeric code for greater security. You can toggle between the two options on the input screen.
+  </Step>
+  <Step title="Enter and confirm your passcode">
+    Type your passcode, then enter it again to confirm. Unigram stores a salted hash of the passcode — it is never saved in plain text.
+  </Step>
+</Steps>
+
+Once set, the passcode page shows options to **Change Passcode**, **Disable Passcode**, and configure the auto-lock timer.
+
+## Auto-lock timer
+
+When a passcode is enabled, Unigram can automatically lock itself after a period of inactivity.
+
+Open **Settings** → **Privacy and Security** → **Passcode** and use the **Auto Lock** dropdown to choose a delay:
+
+| Setting | Behaviour |
+|---|---|
+| Disabled | The app never locks automatically. |
+| 1 minute | Locks after 1 minute of no interaction. |
+| 5 minutes | Locks after 5 minutes of no interaction. |
+| 1 hour | Locks after 1 hour of no interaction. |
+| 5 hours | Locks after 5 hours of no interaction. |
+
+<Tip>
+  If you step away from your computer frequently, set a shorter auto-lock delay such as 1 or 5 minutes to prevent others from reading your messages.
+</Tip>
+
+## Windows Hello (biometrics)
+
+If your device supports Windows Hello (fingerprint reader, face recognition, or PIN), you can unlock Unigram with biometrics instead of typing your passcode every time.
+
+On the **Passcode** settings page, check **Unlock with Windows Hello** to enable it. This option appears only when your device reports Windows Hello support.
+
+<Note>
+  Enabling Windows Hello does not replace your passcode — the passcode remains as a fallback if biometric authentication fails or is unavailable.
+</Note>
+
+## Changing or disabling the passcode
+
+- **Change passcode**: Tap **Change Passcode** on the Passcode settings page. You will be asked to enter a new code and confirm it.
+- **Disable passcode**: Tap **Disable Passcode**. Unigram will ask you to confirm before removing the lock. Disabling the passcode also clears the auto-lock timer.
+
+<Warning>
+  Disabling the passcode removes the app lock entirely. Anyone with access to your Windows session can open Unigram without any authentication.
+</Warning>
+
+## Passkeys
+
+Passkeys are a FIDO2-based authentication standard that replaces passwords with device-bound cryptographic credentials. Unigram supports using passkeys as an alternative way to secure your Telegram account login.
+
+<Steps>
+  <Step title="Open Passkeys settings">
+    Go to **Settings** → **Privacy and Security** → **Passkey**.
+  </Step>
+  <Step title="Add a passkey">
+    Tap **Add Passkey**. Windows will prompt you to create a passkey using Windows Hello or a hardware security key. Follow the on-screen instructions to complete registration.
+  </Step>
+  <Step title="Manage existing passkeys">
+    Registered passkeys appear in the list with their creation date. To remove a passkey, right-click it and select the delete option.
+  </Step>
+</Steps>
+
+<Note>
+  Passkeys are used for account login authentication and are separate from the local app passcode. Having a passkey registered does not replace your passcode lock.
+</Note>
+
+## Two-step verification
+
+Two-step verification (also called a cloud password) protects your Telegram **account** — not just the local app. When enabled, logging in from a new device requires both the SMS code sent to your phone and this additional password.
+
+<Steps>
+  <Step title="Open Two-Step Verification settings">
+    Go to **Settings** → **Privacy and Security** → **Two-Step Verification**.
+  </Step>
+  <Step title="Set a cloud password">
+    Enter a strong password and confirm it. Optionally add a recovery email address so you can reset the password if you forget it.
+  </Step>
+  <Step title="Confirm the recovery email">
+    If you added a recovery email, Telegram sends a confirmation code to that address. Enter the code to verify it.
+  </Step>
+</Steps>
+
+Once enabled, the Two-Step Verification page shows options to **Change Password**, **Turn Off**, and **Change Recovery Email**.
+
+<Warning>
+  If you forget your cloud password and have not set a recovery email, you cannot recover access to your account. You would need to reset your account, which deletes all your cloud data.
+</Warning>
+
+## Active sessions
+
+You can view and manage all devices currently logged into your Telegram account from **Settings** → **Privacy and Security** → **Sessions** (also accessible as **Settings** → **Devices**).
+
+Each active session shows the device type, operating system, app version, IP address, and the time of last activity.
+
+To terminate a session:
+
+<Steps>
+  <Step title="Open Sessions">
+    Go to **Settings** → **Privacy and Security** → **Sessions**.
+  </Step>
+  <Step title="Select a session to terminate">
+    Tap any session in the list (other than the current device) to open its details and select **Terminate Session**.
+  </Step>
+  <Step title="Terminate all other sessions">
+    To log out of every other device at once, select **Terminate All Other Sessions** at the top of the page.
+  </Step>
+</Steps>
+
+<Tip>
+  Review your active sessions regularly and terminate any sessions you do not recognise. An unrecognised session may indicate that someone else has access to your account.
+</Tip>

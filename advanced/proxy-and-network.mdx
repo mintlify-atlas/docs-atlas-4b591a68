@@ -1,0 +1,116 @@
+---
+title: 'Proxy and network'
+description: 'Route Unigram traffic through SOCKS5, HTTP, or MTProxy servers, and monitor your data usage from the network statistics screen.'
+---
+
+Unigram supports three proxy protocols — SOCKS5, HTTP, and MTProxy — stored in a local SQLite database and applied across all active accounts simultaneously. You can configure them under **Settings** > **Advanced** > **Connection type**.
+
+## Proxy types
+
+<CardGroup cols={3}>
+  <Card title="SOCKS5" icon="shield">
+    A general-purpose TCP proxy. Supports optional username/password authentication. Works with most proxy providers.
+  </Card>
+  <Card title="HTTP" icon="globe">
+    An HTTP CONNECT proxy. Supports optional credentials and an HTTP-only mode that restricts non-HTTP traffic.
+  </Card>
+  <Card title="MTProxy" icon="telegram">
+    Telegram's custom obfuscated proxy protocol. Requires only a server address, port, and a secret token. Resistant to deep packet inspection.
+  </Card>
+</CardGroup>
+
+## Adding a proxy manually
+
+<Steps>
+  <Step title="Open proxy settings">
+    Go to **Settings** > **Advanced** > **Connection type** > **Proxy**.
+  </Step>
+  <Step title="Add a new proxy">
+    Tap the **+** button to open the proxy editor dialog.
+  </Step>
+  <Step title="Select the protocol">
+    Choose **SOCKS5**, **HTTP**, or **MTProxy** from the type selector.
+  </Step>
+  <Step title="Fill in the server details">
+    Enter the **Server** hostname or IP address and the **Port** number.
+
+    - For **SOCKS5** and **HTTP**: enter a **Username** and **Password** if your proxy requires authentication.
+    - For **HTTP** only: enable **HTTP only** if your proxy rejects non-HTTP traffic.
+    - For **MTProxy**: enter the **Secret** token provided by the proxy operator.
+  </Step>
+  <Step title="Save and enable">
+    Tap **Done**. The proxy is saved and enabled immediately. Unigram pings the server and displays the round-trip latency next to it.
+  </Step>
+</Steps>
+
+<Note>
+  Unigram checks for duplicate entries before saving. If you add a proxy that matches an existing one exactly — same server, port, protocol, and credentials — it will not be added again.
+</Note>
+
+## Adding an MTProxy via a t.me link
+
+Proxy operators typically share MTProxy servers as `t.me/proxy?server=…&port=…&secret=…` links. Opening one of these links inside Unigram adds the proxy automatically.
+
+<Steps>
+  <Step title="Tap or paste the link">
+    Tap a `t.me/proxy` link in any chat, or paste it into the address bar of any browser and open it with Unigram.
+  </Step>
+  <Step title="Confirm in the dialog">
+    Unigram shows a preview of the server address and port. Tap **Enable** to add and activate it.
+  </Step>
+</Steps>
+
+<Tip>
+  Follow [t.me/unigramappx](https://t.me/unigramappx) or other Telegram channels that publish MTProxy links if you need a working proxy.
+</Tip>
+
+## Switching between proxies
+
+All saved proxies appear in the proxy list. Each entry shows the server address, port, and its current connection status (checking, connected, or an error message).
+
+- **Tap a proxy** to enable it. The previously active proxy is disabled automatically.
+- **Right-click a proxy** (or long-press) to access the context menu. From there you can **Edit**, **Delete**, **Share**, or **Copy link** for SOCKS5 and MTProxy entries.
+- To select multiple proxies, right-click any entry and choose **Select**. You can then bulk-copy or bulk-delete the selection.
+
+## Disabling the proxy
+
+<Tabs>
+  <Tab title="Disable completely">
+    Go to **Settings** > **Advanced** > **Connection type** and select **Disabled**. Unigram connects directly without any proxy.
+  </Tab>
+  <Tab title="Use system proxy">
+    Select **System** to let Unigram follow the HTTP proxy configured in Windows network settings. Unigram watches for system proxy changes and updates the connection automatically.
+  </Tab>
+</Tabs>
+
+<Warning>
+  Deleting the currently active proxy disables it and removes it from storage. Make sure you have the proxy details saved elsewhere before deleting.
+</Warning>
+
+## Sharing a proxy link
+
+For SOCKS5 and MTProxy proxies, Unigram can generate a shareable `t.me/proxy` link.
+
+- Right-click a proxy and choose **Copy link** to copy the URL to the clipboard.
+- Choose **Share** to forward the link to a chat directly from within Unigram.
+
+## Network usage statistics
+
+Unigram tracks how many bytes have been sent and received, broken down by media type. To view:
+
+<Steps>
+  <Step title="Open network stats">
+    Go to **Settings** > **Advanced** > **Network usage**.
+  </Step>
+  <Step title="Review usage">
+    The screen shows total bytes transferred since the last reset, formatted in human-readable units (KB, MB, GB). The header shows the date the counter was last reset.
+  </Step>
+</Steps>
+
+The counter covers all file transfers handled by TDLib, including messages, photos, videos, documents, and voice messages. It does not reset automatically — you can reset it manually from the same screen.
+
+## Connection type and metered networks
+
+Unigram reads the Windows connection profile on startup and whenever the network changes. It detects whether the current connection is metered (mobile data or a capped plan) and reports this to TDLib, which uses it to adjust background download behaviour.
+
+To force a reconnection after a network change — for example after waking the device or switching Wi-Fi networks — go to **Settings** > **Advanced** and tap **Reconnect**.

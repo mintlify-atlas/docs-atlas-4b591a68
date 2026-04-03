@@ -1,0 +1,190 @@
+---
+title: "Privacy settings"
+description: "Control who can see your phone number, last seen status, profile photo, and more. Manage blocked users and review active sessions from a single place."
+---
+
+Unigram's privacy settings let you decide exactly who can see your information and how they can contact you. All of these settings are stored on Telegram's servers, so they apply across every device where you use Telegram.
+
+To access privacy settings, go to **Settings** → **Privacy and Security**.
+
+## Phone number
+
+Your phone number is the identifier tied to your Telegram account. You have separate controls for who can see it and who can find you by searching it.
+
+Navigate to **Settings** → **Privacy and Security** → **Phone Number**.
+
+<AccordionGroup>
+  <Accordion title="Who can see my phone number">
+    Choose one of three visibility levels:
+
+    - **Everybody** — any Telegram user who opens your profile can see your number.
+    - **My Contacts** — only people in your contact list can see your number.
+    - **Nobody** — no one can see your number from your profile.
+  </Accordion>
+  <Accordion title="Who can find me by my number">
+    This setting controls whether people can find your Telegram account by entering your phone number in search. When set to **Nobody**, people must already know your @username to contact you.
+
+    If you set visibility to **Nobody**, you can still allow finding by number for **My Contacts** or **Everybody** independently. When nobody can find you by number, Telegram shows a toggle to share your account link instead.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  Hiding your phone number does not prevent people who already have your number saved in their contacts from seeing that you are on Telegram — Telegram matches numbers during contact sync.
+</Note>
+
+## Last seen and online status
+
+Control when others can see that you are online or when you were last active.
+
+Navigate to **Settings** → **Privacy and Security** → **Last Seen & Online**.
+
+Choose who sees your last seen time and online indicator:
+
+- **Everybody** — all Telegram users see your last seen time and online status.
+- **My Contacts** — only your contacts see your status.
+- **Nobody** — your last seen time is hidden from everyone.
+
+You can also add specific users to an **Always Share With** list or a **Never Share With** list to override the general setting for those individuals.
+
+<Note>
+  If you hide your last seen status, you will also stop seeing the last seen time of users who have their status set to **Nobody**. This is a mutual restriction.
+</Note>
+
+<Tip>
+  Telegram Premium subscribers can configure last seen visibility with more granular exceptions, such as sharing status with Premium users only.
+</Tip>
+
+## Profile photo
+
+Control who can see your profile photo.
+
+Navigate to **Settings** → **Privacy and Security** → **Profile Photo**.
+
+| Option | Who sees your photo |
+|---|---|
+| Everybody | All Telegram users |
+| My Contacts | Only your saved contacts |
+| Nobody | No one outside Telegram |
+
+As with last seen, you can add per-user exceptions using the **Always Share With** and **Never Share With** lists.
+
+## Bio and birthday
+
+Your profile bio and birthday have their own visibility settings, each accessible from the **Privacy** section:
+
+- **Bio** — navigate to **Settings** → **Privacy and Security** → **Bio** to choose who can read your profile description.
+- **Birthday** — navigate to **Settings** → **Privacy and Security** → **Date of Birth** to control who sees your birthday in your profile.
+
+Both follow the same **Everybody / My Contacts / Nobody** pattern with per-user overrides.
+
+## Forwarded messages
+
+When someone forwards a message you sent, Telegram can attribute it to you with a link back to your profile. This setting controls whether that attribution appears.
+
+Navigate to **Settings** → **Privacy and Security** → **Forwarded Messages**.
+
+- **Everybody** — forwarded messages show your name and a link to your profile.
+- **My Contacts** — only contacts see the attribution link when they receive a forwarded message.
+- **Nobody** — forwarded messages show your name but no clickable link back to your account.
+
+The settings page shows a live preview of how forwarded messages appear to others under each option.
+
+## Calls
+
+Control who can call you on Telegram.
+
+Navigate to **Settings** → **Privacy and Security** → **Calls**.
+
+Choose **Everybody**, **My Contacts**, or **Nobody**, and add per-user overrides as needed.
+
+### Peer-to-peer calls
+
+For Telegram voice calls, you can separately control whether Telegram routes your calls through its servers (to hide your IP address) or connects directly peer-to-peer (P2P):
+
+Navigate to **Settings** → **Privacy and Security** → **Peer-to-Peer**. Options are **Everybody**, **My Contacts**, and **Nobody** (always route through Telegram servers).
+
+<Tip>
+  Setting peer-to-peer to **Nobody** hides your IP address from the people you call, at the cost of slightly higher latency.
+</Tip>
+
+## Voice messages (Telegram Premium)
+
+Restrict who can send you voice messages and video notes in private chats. This is a Telegram Premium feature.
+
+Navigate to **Settings** → **Privacy and Security** → **Voice Messages**.
+
+<Note>
+  This setting is only available if you have an active Telegram Premium subscription. Without Premium, all contacts and non-contacts can send you voice messages by default.
+</Note>
+
+Choose **Everybody**, **My Contacts**, or **Nobody**, with per-user exceptions available in both directions.
+
+## Messages from new contacts (Telegram Premium)
+
+Control whether people who are not in your contacts can send you messages in private chats. This is a Telegram Premium feature.
+
+Navigate to **Settings** → **Privacy and Security** → **Messages**.
+
+When restricted, non-contacts see a notice that they cannot message you directly, but they can still interact with you in group chats.
+
+## Groups and channels
+
+Control who can add you to group chats and channels.
+
+Navigate to **Settings** → **Privacy and Security** → **Groups and Channels**.
+
+- **Everybody** — any user can add you to a group or channel.
+- **My Contacts** — only your contacts can add you directly. Others must send you an invite link.
+- **Nobody** — no one can add you to groups directly. You can still join via invite links.
+
+## Blocking contacts
+
+Block any user to stop receiving messages, calls, and profile updates from them.
+
+<Steps>
+  <Step title="Open Blocked Users">
+    Go to **Settings** → **Privacy and Security** → **Blocked Users**.
+  </Step>
+  <Step title="View and unblock existing entries">
+    The blocked users list shows everyone you have blocked. Tap a user to navigate to their profile. To unblock, right-click their entry in the list and select **Unblock**.
+  </Step>
+  <Step title="Block someone new">
+    You can also block a user directly from a conversation. Open the chat, tap the user's name to open their profile, scroll down, and select **Block User**.
+  </Step>
+</Steps>
+
+Blocking a user:
+
+- Prevents them from sending you messages in private chats.
+- Prevents them from calling you.
+- Hides your last seen and online status from them.
+- Removes them from your contact list if they were saved.
+
+<Note>
+  Blocked users do not receive a notification that they have been blocked. From their perspective, their messages appear to send but you never receive them.
+</Note>
+
+## Active sessions
+
+View all devices and applications currently logged into your Telegram account, and terminate any you do not recognise.
+
+Navigate to **Settings** → **Privacy and Security** → **Sessions**.
+
+Each session entry shows:
+
+- Device type and operating system
+- Telegram app version
+- Approximate geographic location based on IP
+- Date and time of last activity
+
+To terminate a single session, tap it and confirm. To remove all sessions except the current device, use **Terminate All Other Sessions**.
+
+<Warning>
+  If you see a session you do not recognise, terminate it immediately and change your cloud password under **Two-Step Verification** to prevent further unauthorised access.
+</Warning>
+
+## Account self-destruction
+
+If you do not log into Telegram for an extended period, your account and all its data will be permanently deleted. You can configure this timeout under **Settings** → **Privacy and Security** → **Delete My Account If Away For**.
+
+Available periods are 1 month, 3 months, 6 months, and 1 year.

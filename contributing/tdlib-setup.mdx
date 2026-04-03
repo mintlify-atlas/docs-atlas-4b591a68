@@ -1,0 +1,143 @@
+---
+title: TDLib setup
+description: How to build TDLib from source for UWP, install it to Unigram, and enable verbose logging for troubleshooting.
+---
+
+## What is TDLib?
+
+TDLib (Telegram Database Library) is Telegram's official open-source client library. It handles all communication with Telegram servers — authentication, message delivery, encryption, and the full MTProto protocol — so Unigram can focus on the Windows UI instead of reimplementing the Telegram protocol.
+
+Unigram builds TDLib as a native UWP component and distributes it as a NuGet package stored in the local `Libraries` folder. The `nuget.config` file includes this folder as a package source alongside `nuget.org`.
+
+## Required tools
+
+Before building TDLib, install the following tools:
+
+<CardGroup cols={2}>
+  <Card title="Visual Studio 2022" icon="microsoft">
+    Enable **C++** and **Windows 10 SDK** workloads during installation.
+  </Card>
+  <Card title="CMake" icon="hammer">
+    Choose **"Add CMake to the system PATH"** during installation.
+  </Card>
+  <Card title="Git" icon="code-branch">
+    Required for cloning TDLib and vcpkg.
+  </Card>
+  <Card title="PHP" icon="code">
+    Download and unpack PHP, then add the path to `php.exe` to your `PATH` environment variable. Close and re-open PowerShell after changing `PATH`.
+  </Card>
+</CardGroup>
+
+<Note>
+  TDLib uses its own separate vcpkg instance. You do not need to reuse the vcpkg you set up for the main Unigram build.
+</Note>
+
+## Building TDLib from source
+
+<Steps>
+  <Step title="Clone TDLib">
+    ```powershell
+    git clone https://github.com/tdlib/td.git
+    cd td
+    ```
+  </Step>
+
+  <Step title="Clone and bootstrap vcpkg inside the TDLib directory">
+    ```powershell
+    git clone https://github.com/Microsoft/vcpkg.git
+    cd vcpkg
+    git checkout cff6ed45719c0162fa7065fdac90506a0add812c
+    ./bootstrap-vcpkg.bat
+    ```
+  </Step>
+
+  <Step title="Install vcpkg dependencies">
+    Install `gperf` and the required cryptography libraries. Note that `gperf:x86-windows` is required regardless of which target architecture you build for.
+
+    <CodeGroup>
+
+    ```powershell x64
+    ./vcpkg.exe install gperf:x86-windows openssl:x64-uwp zlib:x64-uwp
+    ```
+
+    ```powershell arm64
+    ./vcpkg.exe install gperf:x86-windows openssl:arm64-uwp zlib:x64-uwp
+    ```
+
+    </CodeGroup>
+  </Step>
+
+  <Step title="Build TDLib and generate the NuGet package">
+    Navigate back to the TDLib root, then run the UWP build script. The `-nupkg` flag generates a `.nupkg` file ready for use with Unigram.
+
+    ```powershell
+    cd ..
+    cd example/uwp
+    powershell -ExecutionPolicy ByPass ./build.ps1 -vcpkg_root ../../vcpkg -nupkg
+    ```
+
+    <Note>
+      You can build for x64, arm64, or both. The `gperf:x86-windows` dependency is always required regardless of your chosen architecture.
+    </Note>
+  </Step>
+
+  <Step title="Install the NuGet package to Unigram">
+    Copy the resulting `.nupkg` file into the `Unigram\Libraries` directory of your Unigram repository. The `nuget.config` file configures NuGet to resolve packages from this local folder, so Visual Studio will pick it up automatically on the next restore.
+  </Step>
+</Steps>
+
+## Enabling TDLib verbose logging
+
+TDLib verbose logging captures detailed information about all Telegram protocol activity. This is useful when diagnosing authentication issues, message delivery problems, or network errors.
+
+<Warning>
+  Never send log files to an unknown person. Only send them to Telegram Support (**Settings > Ask a Question**) or to [@tdlib_bot](https://t.me/tdlib_bot).
+</Warning>
+
+### Opening Diagnostic settings
+
+<CardGroup cols={2}>
+  <Card title="Before signing in" icon="user-slash">
+    On the sign-in screen, click the app version number **10 times** to open the Diagnostic settings.
+  </Card>
+  <Card title="While signed in" icon="user">
+    Open the hamburger menu, select **Settings**, then click the app version number **10 times**.
+  </Card>
+</CardGroup>
+
+### Enabling debug logging
+
+In the Diagnostic settings, under **TDLib Logs**, select **Verbosity level** and set it to **Debug**.
+
+### Sending a log file through the app
+
+To send logs via the app, you must disable logging first:
+
+<Steps>
+  <Step title="Disable logging">
+    Navigate to the Diagnostic settings, select **Verbosity level**, and set it back to **Error**.
+  </Step>
+  <Step title="Send the log file">
+    Click the item below the verbosity setting (labelled `tdlib_log.txt`). A dialog will open where you can choose a chat to send the file to.
+  </Step>
+</Steps>
+
+### Finding the log file manually
+
+If you are signed out of the app and cannot send logs through the UI, you can locate the log file manually.
+
+Press **Windows+R** and paste the path to the `LocalState` folder for your Unigram installation:
+
+<CodeGroup>
+
+```text Microsoft Store (Unigram Preview)
+%LOCALAPPDATA%\Packages\38833FF26BA1D.UnigramPreview_g9c9v27vpyspw\LocalState
+```
+
+```text Microsoft Store (Unigram)
+%LOCALAPPDATA%\Packages\TelegramFZ-LLC.Unigram_1vfw5zm9jmzqy\LocalState
+```
+
+</CodeGroup>
+
+Grab the `tdlib_log.txt` file from that folder and send it to the appropriate support contact.

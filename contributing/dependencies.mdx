@@ -1,0 +1,133 @@
+---
+title: Dependencies
+description: An overview of the managed and native libraries Unigram depends on, including how each is built and integrated.
+---
+
+Unigram uses **NuGet** for managed (.NET) dependencies and **vcpkg** for native (C++) libraries. Some components — TDLib, LibVLC, and WebRTC — are built separately and distributed as NuGet packages placed in the `Libraries` folder.
+
+## Managed dependencies (NuGet)
+
+The following NuGet packages are referenced by the main `Telegram` project:
+
+| Package | Version | Purpose |
+|---|---|---|
+| `Clipper2` | 1.5.4 | Polygon clipping and offsetting |
+| `Microsoft.Bcl.HashCode` | 6.0.0 | Backport of `HashCode` for UWP |
+| `Microsoft.NETCore.UniversalWindowsPlatform` | 6.2.14 | UWP .NET runtime |
+| `Microsoft.UI.Xaml` (WinUI 2) | 2.8.7 | Modern UI controls |
+| `Microsoft.Web.WebView2` | 1.0.3595.46 | Chromium-based web rendering |
+| `PolySharp` | 1.15.0 | C# language feature polyfills |
+| `Rg.DiffUtils` | 1.0.0 | Diff/patch utilities |
+| `SQLitePCLRaw.bundle_winsqlite3` | 2.1.11 | SQLite bindings via the Windows-provided library |
+| `System.Memory` | 4.6.3 | `Span<T>`, `Memory<T>` backport |
+| `System.Text.Json` | 10.0.0 | JSON serialization |
+| `System.Threading.Channels` | 10.0.0 | Async producer/consumer channels |
+| `System.ValueTuple` | 4.6.1 | `ValueTuple` backport |
+| `VideoLAN.LibVLC.UWP` | 3.0.22-rc1 | LibVLC video/audio playback for UWP |
+| `Win2D.uwp` | 1.28.3 | GPU-accelerated 2D graphics (DirectX) |
+| `System.Reflection.Metadata` | 10.0.0 | Metadata reading utilities |
+
+<Note>
+  NuGet packages are restored automatically by Visual Studio. The `nuget.config` file configures two sources: `nuget.org` and a local `Libraries` folder for packages that are built from source.
+</Note>
+
+## Native dependencies (vcpkg)
+
+These libraries are built via vcpkg and targeted to UWP (`x64-uwp` and `arm64-uwp`). See [Build instructions](/contributing/build-instructions) for the full installation steps.
+
+<CardGroup cols={2}>
+  <Card title="FFmpeg" icon="film">
+    Audio and video decoding. Built with a custom set of codec flags — the default portfile must be patched before installation. Supports codecs including H.264, HEVC, AV1, VP8/VP9, AAC, MP3, Opus, FLAC, and many PCM formats.
+  </Card>
+  <Card title="lz4" icon="file-zip">
+    Fast lossless compression library used for data compression.
+  </Card>
+  <Card title="OpenSSL" icon="lock">
+    Cryptography and TLS. Required by TDLib and other components.
+  </Card>
+  <Card title="zlib" icon="file-archive">
+    General-purpose compression library.
+  </Card>
+  <Card title="libogg" icon="music">
+    Ogg bitstream container format, required by the Opus codec.
+  </Card>
+  <Card title="opus" icon="microphone">
+    Opus audio codec for voice messages and calls.
+  </Card>
+  <Card title="boost-regex" icon="code">
+    Boost regular expressions library.
+  </Card>
+</CardGroup>
+
+Install all native libraries for both architectures:
+
+```powershell
+./vcpkg.exe install ffmpeg[dav1d,opus,vpx]:x64-uwp lz4:x64-uwp openssl:x64-uwp zlib:x64-uwp libogg:x64-uwp opus:x64-uwp boost-regex:x64-uwp
+./vcpkg.exe install ffmpeg[dav1d,opus,vpx]:arm64-uwp lz4:arm64-uwp openssl:arm64-uwp zlib:arm64-uwp libogg:arm64-uwp opus:arm64-uwp boost-regex:arm64-uwp
+./vcpkg.exe integrate install
+```
+
+<Note>
+  You can install only the architecture you need (x64 or arm64) rather than both.
+</Note>
+
+## LibVLC
+
+Unigram uses LibVLC for video and audio playback. The system-provided media player does not meet the app's quality requirements, so LibVLC is bundled directly.
+
+- **Version:** `3.0.22-rc1` with additional patches applied on top
+- **Build script:** `Unigram repository\Libraries\vlc\build.ps1`
+- **Requires:** [Docker Desktop for Windows](https://docs.docker.com/desktop/setup/install/windows-install/) installed and running
+
+To build LibVLC:
+
+```powershell
+powershell -ExecutionPolicy ByPass ./build.ps1 -arch x64,ARM64
+```
+
+The script applies the required patches to the LibVLC source (included as a submodule) and produces a NuGet package in the `Libraries` folder. The resulting package corresponds to the `VideoLAN.LibVLC.UWP` NuGet reference.
+
+<Tip>
+  If you don't need to modify LibVLC, you can skip this step — the pre-built NuGet package is already referenced from `nuget.org`.
+</Tip>
+
+## WebRTC
+
+Unigram uses WebRTC for voice calls and video chats. Because WebRTC does not officially support UWP, Unigram uses a custom UWP fork.
+
+- **Source:** `Unigram repository\Libraries\webrtc`
+- **Acquire script:** `acquire.cmd` — clones the WebRTC source to `C:\webrtc` (~1.5 hours)
+- **Build script:** `build.cmd "$arch$" "$config$"`
+
+<Warning>
+  Building WebRTC is resource-intensive and can take over 90 minutes. For most contributors, building [without WebRTC](/contributing/build-instructions#building-without-webrtc-skip-calls-support) is recommended unless you are specifically working on calls or video chat features.
+</Warning>
+
+Build steps:
+
+1. Open **Start Menu → Visual Studio 2022 → x64 Native Tools Command Prompt for VS 2022**.
+2. Navigate to `.\Unigram\Libraries\webrtc`.
+3. Run `.\acquire.cmd` to clone the WebRTC source code.
+4. Run `.\build.cmd "$arch$" "$config$"`, replacing `$arch$` with `x64`, `win32`, or `arm64` and `$config$` with `release` or `debug`.
+
+<Note>
+  The WebRTC build instructions are based on [WinRTC](https://github.com/microsoft/winrtc/tree/master/patches_for_WebRTC_org/m84).
+</Note>
+
+## TDLib
+
+Unigram communicates with Telegram servers through TDLib, the official Telegram client library.
+
+- **Source:** Built separately from the [tdlib/td](https://github.com/tdlib/td) repository
+- **Distribution:** A `.nupkg` file placed in `Unigram\Libraries`, resolved by NuGet via the local `Libraries` package source
+
+See [TDLib setup](/contributing/tdlib-setup) for the full build guide.
+
+## Architecture support
+
+Unigram supports the following build targets:
+
+| Architecture | vcpkg triplet | Use case |
+|---|---|---|
+| x64 | `x64-uwp` | 64-bit Intel/AMD desktops and laptops |
+| ARM64 | `arm64-uwp` | ARM-based devices (e.g., Snapdragon X) |

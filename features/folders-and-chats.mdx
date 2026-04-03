@@ -1,0 +1,132 @@
+---
+title: Folders and Chats
+description: Organize your chats with folders in Unigram — create, edit, and navigate folders, pin and mute chats, manage the archive, and create new groups and channels.
+---
+
+Unigram lets you organize all your conversations with chat folders, pinned chats, and the archive. Keyboard shortcuts let you switch between folders and chats without touching the mouse.
+
+## Chat folders
+
+Chat folders (also called filters) group chats by criteria you define. They appear as tabs at the top or left side of the chat list.
+
+### Creating a folder
+
+<Steps>
+  <Step title="Open folder settings">
+    Go to **Settings → Folders**, or click the **Edit** button next to the folder tab bar.
+  </Step>
+  <Step title="Create a new folder">
+    Click **Create new folder**. Give the folder a name and choose an icon.
+  </Step>
+  <Step title="Add chats and rules">
+    Under **Included chats**, add specific chats, contacts, or category flags such as **Contacts**, **Non-contacts**, **Groups**, **Channels**, **Bots**, **Unread**, or **Muted**. Under **Excluded chats**, specify chats or categories to leave out.
+  </Step>
+  <Step title="Save">
+    Click **Done**. Unigram sends a `CreateChatFolder` request to TDLib, and the new tab appears in your chat list immediately.
+  </Step>
+</Steps>
+
+### Editing and reordering folders
+
+- To edit a folder, click the **pencil** icon next to its name in **Settings → Folders**.
+- To reorder folders, drag them up or down in the settings list.
+- The **All Chats** entry always corresponds to the main chat list and cannot be removed.
+
+<Note>
+Folder tab placement (top bar vs. left sidebar) is controlled by the **Placement** toggle in **Settings → Folders**.
+</Note>
+
+### Folder limits
+
+| Account type | Max folders | Max chats per folder |
+|---|---|---|
+| Free | 10 | 100 |
+| Telegram Premium | 20 | 200 |
+
+When you reach the folder limit, the **Create new folder** button is disabled automatically.
+
+### Folder keyboard shortcuts
+
+Switch between folders instantly with these shortcuts:
+
+| Folder | Shortcut |
+|---|---|
+| All Chats (first position) | `Ctrl+1` |
+| Second folder | `Ctrl+2` |
+| Third folder | `Ctrl+3` |
+| Fourth folder | `Ctrl+4` |
+| Fifth folder | `Ctrl+5` |
+| Sixth folder | `Ctrl+6` |
+| Seventh folder | `Ctrl+7` |
+| Eighth folder | `Ctrl+8` |
+| Archive | `Ctrl+9` |
+| Saved Messages | `Ctrl+0` |
+
+### Sharing a folder
+
+Folders can optionally be made shareable. Enable this in the folder editor to generate an invite link via **Share folder**. Anyone who opens the link joins the folder's chats automatically.
+
+<Tip>
+Folder tags (colored labels on chats inside a folder) are a **Telegram Premium** feature. Toggle them in **Settings → Folders → Show tags**.
+</Tip>
+
+## Archive folder
+
+The archive stores chats you want to hide from your main list without deleting them.
+
+- Press `Ctrl+9` to jump directly to the archive folder.
+- To archive a chat, right-click it in the chat list and choose **Archive**.
+- Archived chats do not show unread badge counts on the main list unless you pin them inside the archive.
+
+## Pinning and muting chats
+
+### Pinning chats
+
+Right-click any chat in the chat list and choose **Pin** to move it to the top of its folder. You can pin up to 5 chats in the main list and up to the folder chat limit in custom folders.
+
+### Muting chats
+
+Right-click a chat and choose **Mute** to silence notifications. You can mute for 1 hour, 8 hours, 2 days, or indefinitely. A muted icon appears on the chat tile. To unmute, right-click and choose **Unmute**.
+
+## Saved Messages
+
+**Saved Messages** is your personal chat with yourself — use it to store notes, bookmarks, and forwarded content.
+
+- Press `Ctrl+0` to open Saved Messages from anywhere in the app.
+- Forward any message to Saved Messages by right-clicking and choosing **Forward → Saved Messages**.
+
+## Navigating between chats
+
+Move through your chat list entirely with the keyboard:
+
+| Action | Shortcut |
+|---|---|
+| Next chat | `Ctrl+Tab` |
+| Next chat | `Alt+Arrow Up` |
+| Next chat | `Ctrl+Page Up` |
+| Previous chat | `Ctrl+Shift+Tab` |
+| Previous chat | `Alt+Arrow Down` |
+| Previous chat | `Ctrl+Page Down` |
+| Go back | `Escape` or `Alt+Arrow Left` |
+| Go forward | `Alt+Arrow Right` |
+| Change online status | `Ctrl+Shift+Y` |
+| Close current window | `Ctrl+W` |
+| Quit Unigram | `Ctrl+Q` |
+
+## Creating groups, channels, and supergroups
+
+<Tabs>
+  <Tab title="New group">
+    Click the **compose / pencil** button in the chat list header and choose **New group**. Select members from your contacts, enter a group name and photo, then click **Create**. New groups start as basic groups and are automatically converted to supergroups when they exceed 200 members or when you enable certain features.
+  </Tab>
+  <Tab title="New channel">
+    Click **New channel** from the compose menu. Enter the channel name, description, and choose **Public** (with a username) or **Private** (invite-link only). Click **Create** to publish the channel.
+  </Tab>
+  <Tab title="New supergroup">
+    Create a group as above. To convert an existing basic group to a supergroup manually, open **Group info → Edit → Upgrade to supergroup**. Supergroups support up to 200,000 members, admin logs, and granular permissions.
+  </Tab>
+</Tabs>
+
+<Warning>
+Converting a basic group to a supergroup is irreversible. The group history is preserved, but some features available only in basic groups (such as inviting members without a link) will no longer apply.
+</Warning>

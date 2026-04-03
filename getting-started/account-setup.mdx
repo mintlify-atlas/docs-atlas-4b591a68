@@ -1,0 +1,156 @@
+---
+title: "Account setup"
+description: "Sign in to your Telegram account, configure two-step verification, add multiple accounts, and set up your profile in Unigram."
+---
+
+## Signing in with your phone number
+
+Unigram uses your Telegram account. Signing in requires your phone number, which Telegram verifies with a one-time code.
+
+<Steps>
+  <Step title="Enter your phone number">
+    On the sign-in screen, Unigram auto-detects your country and pre-fills the country code. Enter your full phone number in the input field and press **Next** (or press Enter).
+
+    <Tip>
+      You can also sign in by scanning a QR code from another Telegram session. Tap **Log in by QR Code** on your mobile device, then scan the code shown in Unigram.
+    </Tip>
+  </Step>
+  <Step title="Enter the verification code">
+    Telegram sends a code to your existing Telegram apps. If no app is active, it falls back to SMS. Enter the code on the verification screen.
+
+    The code screen tells you where the code was sent — for example, **"We have sent the code to the Telegram app on your other device"** or to a specific phone number via SMS.
+  </Step>
+  <Step title="Enter your cloud password (if enabled)">
+    If you have two-step verification enabled on your account, Unigram shows a password screen after the code is verified. Enter your cloud password to complete sign-in.
+  </Step>
+</Steps>
+
+<Note>
+  If the phone number you enter is not registered with Telegram, Unigram shows a registration screen where you enter your first name and last name to create a new account.
+</Note>
+
+## Two-step verification
+
+Two-step verification (also called a cloud password) adds a password requirement on top of the SMS/app code. Unigram prompts for this password automatically during sign-in when it is enabled.
+
+### Entering your password
+
+On the password screen, type your cloud password and press **Next**. If you set a password hint when creating the password, Unigram displays it below the input field.
+
+Use the eye icon next to the password field to toggle visibility.
+
+### Recovering a forgotten password
+
+<AccordionGroup>
+  <Accordion title="Recover via recovery email">
+    If you set a recovery email when enabling two-step verification:
+
+    1. On the password screen, tap **Forgot password?**
+    2. Telegram sends a recovery code to your recovery email address.
+    3. Enter the code on the recovery screen to regain access.
+  </Accordion>
+  <Accordion title="Reset your account (no recovery email)">
+    If you did not set a recovery email, you can reset your Telegram account. This permanently deletes all your cloud messages, groups, and contacts.
+
+    1. Tap **Forgot password?** on the password screen.
+    2. Tap **Reset account** and confirm the warning dialogs.
+
+    <Warning>
+      Resetting your account is irreversible. All your Telegram data — messages, media, contacts, and groups — will be permanently deleted. Only reset as a last resort.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Email verification
+
+Telegram may ask you to verify an email address as part of the sign-in flow when logging into a new session. This is a separate step from the phone code verification.
+
+<Steps>
+  <Step title="Enter your email address">
+    On the email verification screen, type your email address and tap **Next**.
+  </Step>
+  <Step title="Enter the email code">
+    Check your inbox for the verification code Telegram sent. Enter it on the email code screen.
+  </Step>
+</Steps>
+
+Email verification may appear when Telegram's servers require additional identity confirmation for the session, for example when signing into an account with two-step verification from a new device.
+
+## Adding multiple accounts
+
+Unigram supports up to four simultaneous Telegram accounts. Each account runs in its own session with separate notifications, settings, and chat lists.
+
+<Steps>
+  <Step title="Open the account switcher">
+    In the left sidebar, click your profile photo or name at the top to expand the account menu.
+  </Step>
+  <Step title="Add an account">
+    Click **Add account** at the bottom of the account list. Unigram opens a new sign-in screen in the same window.
+  </Step>
+  <Step title="Sign in to the new account">
+    Complete the phone number verification flow for the second (or third) account. After sign-in, the account is added to the switcher.
+  </Step>
+</Steps>
+
+<Note>
+  The **Add account** option appears only when you have fewer than four accounts signed in. Unigram supports a maximum of four concurrent accounts.
+</Note>
+
+### Switching between accounts
+
+Click your profile photo in the sidebar to open the account list, then click the account you want to switch to. Unigram switches instantly without restarting.
+
+## Signing out
+
+<Steps>
+  <Step title="Open Settings">
+    In the left sidebar, click **Settings**.
+  </Step>
+  <Step title="Open the sign-out dialog">
+    Scroll to the bottom of the Settings page and click **Log out**.
+  </Step>
+  <Step title="Confirm sign-out">
+    The log-out dialog shows options for managing storage, changing your phone number, or setting a passcode before you leave. Click **Log out** to confirm and remove the account from Unigram.
+  </Step>
+</Steps>
+
+<Tip>
+  The log-out dialog also offers an **Add account** shortcut, so you can switch to a different account without losing your current session.
+</Tip>
+
+## Profile setup
+
+After signing in, you can update your display name, bio, username, and profile photo at any time.
+
+<Steps>
+  <Step title="Open your profile">
+    Click **Settings** in the left sidebar, then click your name or photo at the top of the Settings page to open the **Edit profile** screen.
+  </Step>
+  <Step title="Update your name">
+    Edit the **First name** and **Last name** fields. Your first name is required and must be between 1 and 64 characters. Your last name is optional (up to 64 characters).
+  </Step>
+  <Step title="Add or change your bio">
+    Tap the **Bio** field and write a short description. The maximum length is set by Telegram and shown below the field.
+  </Step>
+  <Step title="Set a profile photo">
+    Click the camera icon on your avatar. You can upload a photo from your device or create an animated profile photo.
+  </Step>
+  <Step title="Set a username">
+    On the Edit profile screen, tap **Username**. Choose a unique `@username` that others can use to find you without knowing your phone number.
+  </Step>
+</Steps>
+
+<CardGroup cols={2}>
+  <Card title="Change phone number" icon="phone">
+    Go to **Settings** > **Edit profile** > **Phone number** to initiate a phone number change. Telegram verifies both the old and new numbers.
+  </Card>
+  <Card title="Profile color" icon="palette">
+    Go to **Settings** > **Edit profile** > **Profile color** to choose an accent color and icon that appear on your profile page and replies.
+  </Card>
+  <Card title="Birthdate" icon="cake">
+    Add your birthdate from the **Edit profile** screen. You can restrict visibility to contacts only.
+  </Card>
+  <Card title="Personal channel" icon="megaphone">
+    Link a channel you own as your personal channel. It appears on your profile and lets followers subscribe directly.
+  </Card>
+</CardGroup>

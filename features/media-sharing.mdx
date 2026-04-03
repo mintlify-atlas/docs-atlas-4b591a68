@@ -1,0 +1,136 @@
+---
+title: Media Sharing
+description: Send photos, videos, and files in Unigram — compression options, the download manager, auto-download settings, media viewer, Instant View, and clipboard sharing.
+---
+
+Unigram handles media with built-in compression and transcoding for uploads, and a configurable download folder for files saved to your device.
+
+## Sending photos and videos
+
+<Steps>
+  <Step title="Open the file picker">
+    Click the **paperclip** attachment button in the composer and choose **Photo or video**, or paste an image directly from your clipboard.
+  </Step>
+  <Step title="Choose a compression level">
+      In the send dialog, toggle between sending as a **photo/video** (compressed) or as a **file** (original quality). Use the **High quality** toggle to skip compression when sending as media.
+  </Step>
+  <Step title="Add a caption">
+    Type a caption in the text field inside the popup. Captions support the same formatting shortcuts as regular messages and can be up to the limit set by Telegram's server options.
+  </Step>
+  <Step title="Send">
+    Click **Send**. Unigram processes the file — compressing photos and transcoding videos as needed — before uploading to Telegram.
+  </Step>
+</Steps>
+
+### Compression options
+
+| Mode | What happens |
+|---|---|
+| **Photo / Video (default)** | Image is re-encoded; video is transcoded. File size is reduced for faster delivery. |
+| **High quality** | Image is re-encoded at higher quality settings. Larger file, better fidelity. |
+| **File (no compression)** | File is sent as-is. Original dimensions and bit-rate are preserved. |
+
+### Spoiler media
+
+Toggle **Send with spoiler** in the send popup to blur the photo or video until the recipient taps it to reveal it.
+
+### Self-destructing media
+
+In private chats, you can set a **self-destruct timer** on photos and videos. Open the send popup and adjust the **Self-destruct** option to a timer value. The recipient can only view the media for the set duration before it disappears.
+
+## Sending files
+
+Click the **paperclip** icon and choose **File** to send any file without compression. Telegram supports:
+
+<CardGroup cols={2}>
+  <Card title="Free accounts" icon="file">
+    Upload and download files up to **2 GB** per file.
+  </Card>
+  <Card title="Telegram Premium" icon="star">
+    Upload and download files up to **4 GB** per file.
+  </Card>
+</CardGroup>
+
+You can send multiple files at once by selecting several items in the picker. Unigram groups them into an album if they are all images or videos, or sends them as individual file messages otherwise.
+
+## Download manager
+
+Unigram has a built-in download manager accessible from **Settings → Downloads** or from the downloads indicator in the main toolbar.
+
+<Accordion title="Adding files to the download queue">
+  Right-click a message containing a document, audio, or video, then choose **Download** to add it to the queue. You can also select multiple messages and use the **Download** option in the selection toolbar to batch-download supported content types.
+</Accordion>
+
+<Accordion title="Pause and resume">
+  In the downloads panel you can pause individual downloads by clicking the pause button next to the item. Click it again to resume. The underlying TDLib `DownloadFile` / `CancelDownloadFile` calls handle the actual network operations.
+</Accordion>
+
+<Accordion title="Changing the download folder">
+  Go to **Settings → Data and Storage → Download folder** to pick a custom save location. Unigram stores the folder reference so it can write files there without prompting each time.
+</Accordion>
+
+## Auto-download settings
+
+Control which media types are automatically downloaded based on your connection type:
+
+<Tabs>
+  <Tab title="Mobile data">
+    By default, only photos are auto-downloaded on mobile data. You can extend this to include audio, video, and documents in **Settings → Data and Storage → Mobile data**.
+  </Tab>
+  <Tab title="Wi-Fi">
+    On Wi-Fi, photos and audio are downloaded automatically. You can enable video and documents to download automatically as well.
+  </Tab>
+  <Tab title="Roaming">
+    Auto-download is disabled on roaming by default to avoid unexpected data charges. You can enable specific types if needed.
+  </Tab>
+</Tabs>
+
+<Warning>
+Enabling auto-download for videos and large documents on mobile data can consume significant data. Review these settings if you have a limited data plan.
+</Warning>
+
+## Media viewer and gallery
+
+Double-click any photo or video in a chat to open the **media viewer**. Inside the viewer:
+
+- Use the **left / right arrow** buttons or keyboard arrow keys to browse through previous and next media items in the chat.
+- Click the **download** icon to save the file to your configured download folder.
+- Click **Open with** to send the file to another app via the Windows share target picker.
+- Click the **chat bubble** icon to jump back to the original message.
+
+The gallery view aggregates all shared photos and videos in a chat. Open it from the **Media** tab in a chat's profile page.
+
+## Instant View
+
+Articles and web pages that support Telegram's Instant View format open inside Unigram's built-in `InstantPage` viewer instead of launching a browser. This gives you a clean, distraction-free reading experience.
+
+- Tap a link in a message; if an Instant View version is available, a banner at the bottom of the link preview says **Instant View**. Tap it to open.
+- Inside Instant View, tap any image to open it in the media viewer.
+- Use the share button to forward the article link to another chat.
+
+<Note>
+Instant View pages are rendered by Telegram's servers and displayed using Unigram's native XAML layout engine, so they load quickly even on slow connections.
+</Note>
+
+## Clipboard and drag-and-drop
+
+Unigram accepts incoming data from both clipboard paste and drag-and-drop, handling the following formats:
+
+<CardGroup cols={2}>
+  <Card title="Bitmap image" icon="image">
+    Paste (`Ctrl+V`) a screenshot or copied image directly into the composer. Unigram saves it to a temporary PNG file and opens the **SendFilesPopup** so you can confirm before sending.
+  </Card>
+  <Card title="Storage items" icon="folder-open">
+    Drag one or more files from Windows Explorer into the chat window. Unigram shows the send dialog for media files.
+  </Card>
+  <Card title="Web link" icon="link">
+    Paste a URL and Unigram inserts it at the cursor position in the composer. A link preview card is generated automatically beneath the composer.
+  </Card>
+  <Card title="Plain text" icon="text-size">
+    Drag or paste any plain text into the chat; it is inserted at the current cursor position in the composer, preserving any existing text.
+  </Card>
+</CardGroup>
+
+<Tip>
+You can paste a copied image and add a text caption at the same time — if the clipboard contains both a bitmap and text, Unigram uses the text as the media caption automatically.
+</Tip>

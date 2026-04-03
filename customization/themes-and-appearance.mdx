@@ -1,0 +1,130 @@
+---
+title: "Themes and appearance"
+description: "Customize how Unigram looks with built-in themes, night mode, chat backgrounds, custom color themes, and text size settings."
+---
+
+Unigram gives you fine-grained control over its look and feel. You can switch between light and dark themes, schedule night mode, change the chat background, create custom color themes, and adjust text size — all from **Settings** > **Appearance**.
+
+## Built-in themes
+
+Unigram ships with four built-in themes:
+
+| Theme | Base | Description |
+|-------|------|-------------|
+| **Classic** | Light | The default Telegram light theme with a white background |
+| **Day** | Light | A lighter variant with a customizable accent color |
+| **Tinted** | Dark | A dark blue-tinted theme with a customizable accent color |
+| **Night** | Dark | A deep dark theme with a customizable accent color |
+
+To switch themes, open **Settings** > **Appearance** and select a theme from the theme picker. The preview at the top of the page updates immediately.
+
+Each of the Day, Tinted, and Night themes has an accent color you can change independently. Tap the color circle beneath a theme to open the accent color picker.
+
+## Night mode
+
+Night mode automatically switches Unigram to a dark theme based on a schedule or your system setting.
+
+Go to **Settings** > **Appearance** and tap the current night mode value next to **Auto-night mode** to open the night mode settings. You can choose from three modes:
+
+<AccordionGroup>
+  <Accordion title="Disabled">
+    Night mode is off. Unigram uses whichever theme you have selected at all times.
+  </Accordion>
+  <Accordion title="Scheduled">
+    Unigram switches to the dark theme between a **From** time and a **To** time that you set manually. You can also enable **Use location** to let Unigram calculate sunset and sunrise times for your current position automatically.
+  </Accordion>
+  <Accordion title="System default">
+    Unigram follows the Windows system theme. When Windows switches to dark mode, Unigram switches to the selected dark theme. When Windows switches to light mode, Unigram switches to the selected light theme.
+  </Accordion>
+</AccordionGroup>
+
+When using **Scheduled** mode, select the dark theme you want to appear at night from the theme list shown on the night mode settings page. Custom themes you have installed also appear in that list.
+
+<Note>
+  The night mode theme selection is separate from the day theme selection. You can, for example, use Classic during the day and Night during scheduled hours.
+</Note>
+
+## Chat background
+
+The chat background (wallpaper) fills the area behind messages. Unigram supports patterns, solid colors, and custom images.
+
+<Steps>
+  <Step title="Open background settings">
+    Go to **Settings** > **Appearance** and tap **Chat background** to open the wallpaper picker.
+  </Step>
+  <Step title="Choose a background type">
+    Select from:
+    - **Built-in patterns** — animated or static geometric patterns with a customizable color overlay
+    - **Solid color** — a plain background in any color you choose
+    - **Custom image** — any photo from your device
+    - **Default** — the standard Telegram background for the active theme
+  </Step>
+  <Step title="Adjust and apply">
+    For images and patterns, you can adjust brightness and blur. Tap **Set background** to apply.
+  </Step>
+</Steps>
+
+<Tip>
+  Backgrounds are applied per-theme. Set a separate background for your light and dark themes so each looks correct when night mode switches automatically.
+</Tip>
+
+## Custom color themes
+
+You can create a custom theme based on any existing theme and share it with others as a `.attheme` file.
+
+### Create a theme
+
+<Steps>
+  <Step title="Start from an existing theme">
+    On the **Appearance** page, right-click (or long-press) any theme in the theme picker and select **Create new theme**.
+  </Step>
+  <Step title="Edit colors">
+    The theme editor opens with a list of color keys. Tap any key to open a color picker and change its value. The chat preview updates in real time.
+  </Step>
+  <Step title="Save and apply">
+    Tap **Save** to store the theme. Unigram applies it immediately and adds it to the theme list.
+  </Step>
+</Steps>
+
+### Import a theme
+
+<Steps>
+  <Step title="Open the theme file">
+    Locate a `.attheme` file in File Explorer and open it. Unigram registers as a handler for `.attheme` files and will launch automatically.
+  </Step>
+  <Step title="Confirm installation">
+    A dialog shows a preview of the theme. Tap **Apply** to install and activate it.
+  </Step>
+</Steps>
+
+### Manage custom themes
+
+Custom themes appear in both the day and night theme lists. Right-click a custom theme for options to **Edit**, **Share**, or **Delete** it.
+
+<Warning>
+  Deleting a custom theme is permanent. Export and share it first if you want to keep a backup.
+</Warning>
+
+## Text size and bubble radius
+
+You can adjust the message text size and the roundness of message bubbles independently.
+
+On the **Appearance** page, use the **Text size** slider to scale message text from very small to very large. The two preview messages at the top of the page reflect the change immediately.
+
+Use the **Bubble radius** slider to make message bubbles more rounded or more square. A lower value produces a boxy appearance; a higher value produces fully rounded corners.
+
+## Profile color and name styling
+
+If you have Telegram Premium, you can choose a color for your name as it appears in group chats and replies.
+
+On the **Appearance** page, tap **Name color** to open the color picker. Select one of the available palette colors. The change applies to your account across all Telegram clients.
+
+<Note>
+  Name colors are a Telegram Premium feature. The **Name color** option only appears if your account has an active Premium subscription.
+</Note>
+
+## Power saving mode
+
+Power saving mode reduces or disables animations to lower CPU and GPU usage on battery-constrained devices.
+
+Go to **Settings** > **Appearance** and toggle **Power saving** on. When enabled, Unigram reduces animated sticker playback, disables parallax effects on chat backgrounds, and limits other motion-heavy UI elements.

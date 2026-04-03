@@ -1,0 +1,141 @@
+---
+title: Calls
+description: Make voice and video calls, join group calls and video conferences, share your screen, and manage live streams in Unigram.
+---
+
+Unigram supports end-to-end encrypted one-on-one calls, group video conferences, and live streams in channels and groups. All call audio and video is processed by Unigram's native WebRTC-based VoIP engine.
+
+## One-on-one voice and video calls
+
+### Starting a call
+
+Open a private chat and click the **phone** icon in the top-right toolbar to start a voice call, or click the **camcorder** icon to start a video call. You can also open a contact's profile and tap **Call** or **Video call**.
+
+Unigram calls `StartPrivateCall` on the `VoipService` with the `video` flag set accordingly, which routes through the app's lifetime coordinator so only one active call exists at a time.
+
+### Accepting or rejecting an incoming call
+
+When a call arrives, Unigram displays a full-screen incoming call overlay.
+
+| Action | Shortcut |
+|---|---|
+| Accept the call | `Ctrl+Home` |
+| Reject / hang up the call | `Ctrl+End` |
+
+You can also click the green **Accept** or red **Decline** buttons on the incoming call overlay.
+
+### In-call controls
+
+Once connected, the call window gives you the following controls:
+
+<CardGroup cols={2}>
+  <Card title="Microphone" icon="microphone">
+    Press `Ctrl+PageDown` to mute or unmute your microphone. The button in the call window toggles mute state.
+  </Card>
+  <Card title="Camera" icon="video">
+    Press `Ctrl+PageUp` to turn your camera on or off.
+  </Card>
+  <Card title="Screen sharing" icon="display">
+    Click the **Screen share** button in the call window to pick a window or monitor using the Windows Graphics Capture API. The captured feed replaces the camera stream.
+  </Card>
+  <Card title="End call" icon="phone-xmark">
+    Click the red **End** button or press `Ctrl+End` to disconnect.
+  </Card>
+</CardGroup>
+
+### Switching camera and audio devices
+
+During a call, click the **chevron** next to the camera or microphone button to select a different device from the list. Device changes take effect immediately without dropping the call.
+
+<Note>
+If you switch to screen sharing, your camera stream is replaced. To return to camera video, click **Stop sharing** and re-enable the camera.
+</Note>
+
+## Group calls and video conferences
+
+### Joining a group call
+
+When a group or supergroup has an active video chat, a banner appears at the top of the chat. Click **Join** to enter, or navigate to the group profile and tap **Join Video Chat**.
+
+You can also join directly via an invite link shared by a group member.
+
+### Starting a group call
+
+<Steps>
+  <Step title="Open group info">
+    Tap the group name in the chat header to open the group profile.
+  </Step>
+  <Step title="Start video chat">
+    Click **Start video chat**. Unigram creates the call on Telegram's servers and opens the group call window.
+  </Step>
+  <Step title="Invite participants">
+    Use the **Invite** button inside the call window to add members. You can also share the call link via **Share**.
+  </Step>
+</Steps>
+
+### Scheduling a group call
+
+From the **Start video chat** prompt, choose **Schedule video chat** to pick a future start time. Scheduled calls appear in the group as a countdown message that members can set a reminder for.
+
+### Group call controls
+
+Inside the group call window, you have the following controls:
+
+<CardGroup cols={2}>
+  <Card title="Microphone" icon="microphone">
+    Tap your avatar or the microphone button to mute or unmute. Admins can mute all participants from the settings menu.
+  </Card>
+  <Card title="Camera" icon="video">
+    Click the camera button to start or stop your video. Your video tile appears in the participants grid.
+  </Card>
+  <Card title="Screen sharing" icon="display">
+    Click **Share screen** to broadcast your desktop or a specific window to all participants.
+  </Card>
+  <Card title="Raise hand" icon="hand">
+    Click **Raise hand** to signal you want to speak. The call host can then unmute you.
+  </Card>
+</CardGroup>
+
+### Recording a group call
+
+If you are the call owner or an admin with the appropriate permission, click the **three-dot menu** and choose **Record video chat**. You can choose between audio-only and video recording, and select landscape or portrait orientation. Recordings are saved to your Saved Messages when stopped.
+
+## Live streams
+
+Live streams let channels and public groups broadcast to an unlimited number of viewers.
+
+<Steps>
+  <Step title="Start a live stream">
+    Open the channel profile and choose **Start live stream**. You can stream directly from Unigram (using your camera and microphone) or via an external RTMP encoder.
+  </Step>
+  <Step title="RTMP streaming">
+    Choose **Stream via RTMP** to display the RTMP URL and stream key. Paste these into streaming software such as OBS Studio or Streamlabs.
+  </Step>
+  <Step title="Watch a live stream">
+    Viewers open the channel and tap the live stream banner. The stream plays inside the built-in viewer with audio and chat alongside.
+  </Step>
+</Steps>
+
+<Note>
+Live streams use the same underlying infrastructure as group video chats. The key difference is that an RTMP ingest endpoint is used instead of peer connections, enabling unlimited concurrent viewers.
+</Note>
+
+## Call quality and WebRTC backend
+
+Unigram's calls are powered by a native WebRTC-derived engine exposed through the `Telegram.Native.Calls` layer. Key quality features include:
+
+<Accordion title="Noise suppression">
+  Noise suppression is enabled by default. You can toggle it in **Settings → Privacy and Security → Calls → Noise suppression**.
+</Accordion>
+
+<Accordion title="Signal strength indicator">
+  During a one-on-one call, the call window shows a signal-bars indicator reflecting the real-time network quality of the WebRTC connection.
+</Accordion>
+
+<Accordion title="Reconnection handling">
+  If the network drops briefly, Unigram enters a `Reconnecting` ready state and automatically attempts to re-establish the peer connection. The call window shows a **Reconnecting…** label during this period.
+</Accordion>
+
+<Accordion title="End-to-end encryption">
+  One-on-one calls are end-to-end encrypted. The call window displays an emoji fingerprint that both parties can verify to confirm the call has not been intercepted.
+</Accordion>

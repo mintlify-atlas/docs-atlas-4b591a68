@@ -1,0 +1,138 @@
+---
+title: 'Data and storage'
+description: 'Control what Unigram downloads automatically, where files are saved, how much disk space the cache uses, and how to clear it.'
+---
+
+The **Data and storage** screen (**Settings** > **Advanced** > **Data and storage**) brings together auto-download rules, storage statistics, the download folder picker, and voice call data-saving settings.
+
+## Auto-download
+
+Unigram can download photos, videos, and documents automatically as messages arrive. You can enable or disable this globally, and fine-tune it per media type.
+
+### Enabling or disabling auto-download
+
+Toggle the **Auto-download media** switch at the top of the **Data and storage** screen. Disabling it stops all automatic downloads; files are still available to download on demand.
+
+### Per-type settings
+
+Auto-download is configured separately for **Photos**, **Videos**, and **Documents**. Tap any of the three rows to open its detail screen.
+
+<AccordionGroup>
+  <Accordion title="Photos">
+    Photos are controlled by a set of chat-type toggles: **Contacts**, **Private chats**, **Groups**, and **Channels**. You can enable or disable automatic download for each combination of chat type and network type (Wi-Fi or mobile).
+
+    By default, photos are downloaded automatically in all chat types on both Wi-Fi and mobile connections.
+  </Accordion>
+  <Accordion title="Videos">
+    In addition to the same chat-type toggles as photos, videos have two extra settings:
+
+    - **Maximum size** — files larger than this limit are never downloaded automatically. The default is **10 MB**.
+    - **Preload large videos** — when enabled, Unigram begins buffering a video before you tap play, reducing the wait time. Enabled by default.
+  </Accordion>
+  <Accordion title="Documents">
+    Documents (files, audio, voice messages, and sticker packs) follow the same chat-type toggles. The **Maximum size** limit defaults to **3 MB**. Files above the limit must be downloaded manually.
+  </Accordion>
+</AccordionGroup>
+
+### Network type behaviour
+
+Auto-download rules are evaluated against the active Windows network connection profile:
+
+| Network type | When it applies |
+|---|---|
+| Wi-Fi | Any unmetered connection (home broadband, office Wi-Fi) |
+| Mobile | Any metered connection (mobile hotspot, capped data plan) |
+
+Unigram detects network changes automatically. Switching from Wi-Fi to mobile mid-session applies the mobile download rules immediately.
+
+<Tip>
+  To save mobile data, disable automatic download for videos and large documents when on a cellular connection, while keeping them enabled on Wi-Fi.
+</Tip>
+
+### Resetting auto-download to defaults
+
+If your custom rules have become complicated, you can reset everything at once. At the bottom of the auto-download section, tap **Reset auto-download settings**. This button only appears when your settings differ from the defaults. Unigram asks for confirmation before resetting.
+
+## Video streaming
+
+The **Stream videos** toggle lets Unigram play videos inline without waiting for the full file to download first. Enable this if you have a fast connection and want to start playback immediately.
+
+## Voice call data saving
+
+Under **Use less data for calls**, choose how aggressively Unigram reduces audio quality to conserve bandwidth during voice and video calls:
+
+| Option | When it applies |
+|---|---|
+| **Never** | Full quality on all connections |
+| **On mobile data** | Reduced quality only on metered (mobile) connections |
+| **Always** | Reduced quality on every connection, including Wi-Fi |
+
+## Download folder
+
+By default, Unigram saves files you manually download to the system **Downloads** folder. You can point it to a different location.
+
+<Steps>
+  <Step title="Open Data and storage">
+    Go to **Settings** > **Advanced** > **Data and storage**.
+  </Step>
+  <Step title="Enable a custom folder">
+    Toggle **Save to custom folder** and tap the folder path shown below it.
+  </Step>
+  <Step title="Pick a folder">
+    A standard Windows folder picker opens. Navigate to the folder you want and tap **Select Folder**. Unigram requests persistent access to that folder.
+  </Step>
+  <Step title="Reset to default">
+    To go back to the Downloads folder, tap **Reset** next to the custom path. The reset button only appears when a custom folder is set.
+  </Step>
+</Steps>
+
+<Note>
+  The download folder setting requires Windows 10 version 1809 or later. On earlier builds the option is not shown.
+</Note>
+
+## Storage usage
+
+The **Storage usage** screen (**Settings** > **Advanced** > **Storage usage**) shows a breakdown of how much disk space Unigram's cache is consuming, organised by chat.
+
+### Reading the storage chart
+
+At the top of the screen, a ring chart breaks disk usage down by media category (photos, videos, documents, voice messages, etc.). Check or uncheck each category to include or exclude it from the total shown. The figure updates in real time as you toggle categories.
+
+Below the chart, a list of chats is sorted by their cache size. Tap a chat row to open a deletion dialog for that chat's cached files only.
+
+### Cache retention policy
+
+The **Keep media** slider sets how long Unigram keeps cached media before it becomes eligible for automatic cleanup:
+
+| Slider position | Retention period |
+|---|---|
+| 3 days | Files older than 3 days may be removed |
+| 1 week | Files older than 7 days may be removed |
+| 1 month | Files older than 30 days may be removed |
+| Forever | Cached files are never removed automatically |
+
+### Clearing the cache
+
+<Steps>
+  <Step title="Open storage usage">
+    Go to **Settings** > **Advanced** > **Storage usage**.
+  </Step>
+  <Step title="Select what to clear">
+    Use the category checkboxes to include or exclude file types. The total size shown at the top reflects what will be deleted.
+  </Step>
+  <Step title="Tap Clear cache">
+    Tap **Clear cache** at the bottom of the screen. Unigram deletes all cached files matching your selection. The originals remain on Telegram's servers and can be re-downloaded on demand.
+  </Step>
+</Steps>
+
+### Clearing the local database
+
+Unigram maintains a local SQLite database (`local.db`) that stores your proxy list and other settings. If the database becomes corrupted or you want to fully reset local state, tap the **···** overflow menu in the top-right corner of the Storage usage screen and select **Clear local database**.
+
+<Warning>
+  Clearing the local database removes all saved proxies, migrated settings, and any other data stored locally outside of TDLib's own cache. This action cannot be undone.
+</Warning>
+
+## Draft messages
+
+If you want to clear unsent draft messages from all chats at once, go to **Settings** > **Advanced** > **Data and storage** and tap **Clear drafts**. Unigram confirms before removing all drafts.

@@ -1,0 +1,126 @@
+---
+title: "Notifications"
+description: "Configure global and per-chat notification settings, preview options, badge counts, and notification exceptions in Unigram."
+---
+
+Unigram delivers notifications through the Windows notification system. You can control sounds, previews, and mute settings globally or on a per-chat basis.
+
+Open **Settings** > **Notifications and sounds** to access all notification settings.
+
+## Global notification settings
+
+Global settings apply to all chats unless overridden by a per-chat exception.
+
+### Sounds
+
+Toggle **In-app sounds** to control whether Unigram plays a sound when a message arrives while the app is in the foreground. This setting does not affect system notifications delivered when the app is in the background.
+
+### In-app alerts
+
+<CardGroup cols={2}>
+  <Card title="In-app preview" icon="eye">
+    Shows a banner with the sender name and message text when a message arrives while Unigram is open.
+  </Card>
+  <Card title="In-app vibrate" icon="vibrate">
+    Triggers haptic feedback on supported devices when a message arrives while the app is in the foreground.
+  </Card>
+  <Card title="In-app flash" icon="zap">
+    Flashes the taskbar button when a message arrives while Unigram is in the background.
+  </Card>
+</CardGroup>
+
+## Notification preview settings
+
+These settings control how much information appears in Windows toast notifications.
+
+| Setting | What it shows |
+|---------|---------------|
+| **Show name** on | Notification displays the sender's name (e.g., "Alice") |
+| **Show name** off | Notification displays only "Unigram" |
+| **Show message** on | Notification displays the message text |
+| **Show message** off | Notification displays "You have a new message" |
+
+You can enable or disable each setting independently. For maximum privacy on a shared device, disable both **Show name** and **Show message**.
+
+<Tip>
+  Disabling **Show name** also hides the name in multi-account notifications. If you use multiple Telegram accounts, the notification shows only "Unigram" regardless of which account received the message.
+</Tip>
+
+## Default settings per chat type
+
+Unigram separates notification defaults into three scopes. You can configure the default sound and mute state for each scope from the notifications settings page.
+
+<Tabs>
+  <Tab title="Private chats">
+    Applies to direct messages with other users and secret chats. By default, private chats have notifications enabled with the default Telegram sound.
+  </Tab>
+  <Tab title="Groups">
+    Applies to basic groups and supergroups. By default, group notifications are enabled.
+  </Tab>
+  <Tab title="Channels">
+    Applies to broadcast channels. By default, channel notifications are enabled.
+  </Tab>
+</Tabs>
+
+To change the default for a scope, tap the scope header on the notifications settings page and adjust the sound or mute setting.
+
+## Per-chat notification settings
+
+You can override the global defaults for any individual chat.
+
+### Mute a chat
+
+<Steps>
+  <Step title="Open the chat">
+    Navigate to the chat you want to mute.
+  </Step>
+  <Step title="Open chat info or long-press in the chat list">
+    In the chat list, right-click the chat and select **Mute**. Alternatively, open the chat, tap the chat name at the top to open the profile, and tap **Mute**.
+  </Step>
+  <Step title="Choose a duration">
+    Select how long to mute the chat: **1 hour**, **8 hours**, **2 days**, or **Forever**. The chat list shows a muted icon next to muted chats.
+  </Step>
+</Steps>
+
+### Custom sound for a chat
+
+<Steps>
+  <Step title="Open notification settings for the chat">
+    Right-click the chat in the chat list and select **Notification settings**, or open the chat profile and tap **Notifications**.
+  </Step>
+  <Step title="Select a sound">
+    Tap **Sound** and choose from the available notification sounds. Select **None** to silence notifications from this chat without fully muting it.
+  </Step>
+</Steps>
+
+### Notification exceptions
+
+Notification exceptions are per-chat overrides that show up in a dedicated list. To view all exceptions, go to **Settings** > **Notifications and sounds** and tap **Exceptions** under any scope (Private chats, Groups, or Channels).
+
+Each exception shows the chat name and its current override values. You can edit or remove an exception from this list.
+
+<Note>
+  When you change the sound or mute state for a specific chat, Unigram automatically creates a notification exception for it. The exception persists even if you later change the global default for that scope.
+</Note>
+
+## Badge counts
+
+The Unigram taskbar icon shows a badge with the number of unread items. You can control what that count reflects.
+
+On the **Notifications and sounds** page:
+
+- **Count unread messages** — toggle on to count individual unread messages; toggle off to count the number of chats with unread messages instead.
+- **Include muted chats** — toggle on to include muted chats in the badge count; toggle off to exclude them. By default, muted chats are excluded.
+- **Include muted chats in folder counters** — controls whether muted chats count toward the unread badge on folder tabs. This is enabled by default.
+
+<Tip>
+  If your badge count seems higher than expected, check whether **Include muted chats** is enabled. Muted chats with large backlogs can inflate the count significantly.
+</Tip>
+
+## Do not disturb and snooze
+
+Unigram does not have a built-in global do-not-disturb mode, but you can achieve the same result using Windows Focus Assist (Windows 10) or Windows Focus (Windows 11).
+
+When Windows Focus Assist or Focus is active, Windows suppresses toast notifications from all apps, including Unigram. Unigram notifications are queued and delivered when Focus ends.
+
+For per-chat snoozing, mute the chat for a fixed duration (1 hour, 8 hours, or 2 days) and unmute it manually when you are ready.

@@ -1,0 +1,138 @@
+---
+title: Build instructions
+description: How to set up your development environment and build Unigram from source.
+---
+
+## Prerequisites
+
+Before you begin, install **Visual Studio 2022** with the following workloads and components:
+
+- **.NET desktop development**
+- **Desktop development with C++**
+- **Universal Windows Platform development**
+  - **Windows 11 SDK (10.0.22621.0)**
+
+## Getting the source
+
+<Steps>
+  <Step title="Register a Telegram app">
+    Go to [my.telegram.org/apps](https://my.telegram.org/apps) and register a new app. You will receive an **API ID** and an **API hash** — keep these handy.
+  </Step>
+
+  <Step title="Clone the repository">
+    Clone the repository **recursively** to include all submodules:
+
+    ```bash
+    git clone --recursive https://github.com/UnigramDev/Unigram.git
+    ```
+  </Step>
+
+  <Step title="Create Constants.Secret.cs">
+    Create a new file at `Unigram/Telegram/Constants.Secret.cs` with the following content. Replace `your_api_id` and `your_api_hash` with the credentials from step 1. Set `AppChannel` to the Telegram channel username used for in-app updates.
+
+    ```csharp
+    namespace Telegram
+    {
+        public static partial class Constants
+        {
+            static Constants()
+            {
+                ApiId = your_api_id;
+                ApiHash = "your_api_hash";
+
+                AppChannel = "Telegram channel username used for in-app updates";
+            }
+        }
+    }
+    ```
+  </Step>
+</Steps>
+
+## Installing vcpkg
+
+Unigram uses [vcpkg](https://github.com/Microsoft/vcpkg) to manage native (unmanaged) dependencies.
+
+<Steps>
+  <Step title="Clone and bootstrap vcpkg">
+    Run the following commands to clone vcpkg and check out the required commit:
+
+    ```powershell
+    git clone https://github.com/Microsoft/vcpkg.git
+    cd vcpkg
+    git checkout cff6ed45719c0162fa7065fdac90506a0add812c
+    ./bootstrap-vcpkg.bat
+    ```
+  </Step>
+
+  <Step title="Apply the Unigram patch">
+    Apply the patch file located at `Libraries\vcpkg.patch` to your vcpkg installation.
+  </Step>
+</Steps>
+
+## Configuring FFmpeg
+
+Unigram requires a custom FFmpeg build with specific codec flags enabled. You must edit the vcpkg port configuration before installing.
+
+<Steps>
+  <Step title="Open the FFmpeg portfile">
+    Navigate to `vcpkg\ports\ffmpeg` and open `portfile.cmake`.
+  </Step>
+
+  <Step title="Replace the codec flags">
+    Locate the line containing `--enable-libvpx` and replace it with the full set of flags required by Unigram:
+
+    ```
+    --disable-everything --enable-protocol=file --enable-libopus --enable-libdav1d --enable-libvpx --enable-decoder=aac --enable-decoder=aac_at --enable-decoder=aac_fixed --enable-decoder=aac_latm --enable-decoder=aasc --enable-decoder=ac3 --enable-decoder=alac --enable-decoder=alac_at --enable-decoder=av1 --enable-decoder=eac3 --enable-decoder=flac --enable-decoder=gif --enable-decoder=h264 --enable-decoder=hevc --enable-decoder=libdav1d --enable-decoder=libvpx_vp8 --enable-decoder=libvpx_vp9 --enable-decoder=mp1 --enable-decoder=mp1float --enable-decoder=mp2 --enable-decoder=mp2float --enable-decoder=mp3 --enable-decoder=mp3adu --enable-decoder=mp3adufloat --enable-decoder=mp3float --enable-decoder=mp3on4 --enable-decoder=mp3on4float --enable-decoder=mpeg4 --enable-decoder=msmpeg4v2 --enable-decoder=msmpeg4v3 --enable-decoder=opus --enable-decoder=pcm_alaw --enable-decoder=pcm_alaw_at --enable-decoder=pcm_f32be --enable-decoder=pcm_f32le --enable-decoder=pcm_f64be --enable-decoder=pcm_f64le --enable-decoder=pcm_lxf --enable-decoder=pcm_mulaw --enable-decoder=pcm_mulaw_at --enable-decoder=pcm_s16be --enable-decoder=pcm_s16be_planar --enable-decoder=pcm_s16le --enable-decoder=pcm_s16le_planar --enable-decoder=pcm_s24be --enable-decoder=pcm_s24daud --enable-decoder=pcm_s24le --enable-decoder=pcm_s24le_planar --enable-decoder=pcm_s32be --enable-decoder=pcm_s32le --enable-decoder=pcm_s32le_planar --enable-decoder=pcm_s64be --enable-decoder=pcm_s64le --enable-decoder=pcm_s8 --enable-decoder=pcm_s8_planar --enable-decoder=pcm_u16be --enable-decoder=pcm_u16le --enable-decoder=pcm_u24be --enable-decoder=pcm_u24le --enable-decoder=pcm_u32be --enable-decoder=pcm_u32le --enable-decoder=pcm_u8 --enable-decoder=vorbis --enable-decoder=vp8 --enable-decoder=wavpack --enable-decoder=wmalossless --enable-decoder=wmapro --enable-decoder=wmav1 --enable-decoder=wmav2 --enable-decoder=wmavoice --enable-encoder=aac --enable-encoder=libopus --enable-parser=aac --enable-parser=aac_latm
+    ```
+  </Step>
+</Steps>
+
+## Installing native libraries
+
+With vcpkg configured, install FFmpeg and the other required native libraries. You can install both architectures or just the one you need.
+
+<CodeGroup>
+
+```powershell x64
+./vcpkg.exe install ffmpeg[dav1d,opus,vpx]:x64-uwp lz4:x64-uwp openssl:x64-uwp zlib:x64-uwp libogg:x64-uwp opus:x64-uwp boost-regex:x64-uwp
+```
+
+```powershell arm64
+./vcpkg.exe install ffmpeg[dav1d,opus,vpx]:arm64-uwp lz4:arm64-uwp openssl:arm64-uwp zlib:arm64-uwp libogg:arm64-uwp opus:arm64-uwp boost-regex:arm64-uwp
+```
+
+</CodeGroup>
+
+Then integrate vcpkg with Visual Studio:
+
+```powershell
+./vcpkg.exe integrate install
+```
+
+## Building without WebRTC (skip calls support)
+
+Compiling WebRTC is time-consuming and requires significant resources. If you only want to build and run the app without voice/video call support, follow these steps instead:
+
+1. In **Telegram > References**, remove `Telegram.Native.Calls` from the list.
+2. In **Telegram > Properties > Build**, remove the `ENABLE_CALLS` build directive.
+3. Exclude the following files from the project:
+   - `Controls/Cells/GroupCallParticipantGridCell.xaml`
+   - `Views/Calls/*`
+
+<Tip>
+  For most contributors and first-time builds, building without WebRTC is the recommended starting point. You can add calls support later once the rest of the build is working.
+</Tip>
+
+## If the build fails
+
+<Warning>
+  If your build fails after following these steps, please [open a new issue](https://github.com/UnigramDev/Unigram/issues/new?assignees=&labels=needs-triage&template=anything-else.md&title=) or [submit a pull request](https://github.com/UnigramDev/Unigram/compare) so the team can help and improve these instructions.
+</Warning>
+
+Common things to double-check:
+
+- You cloned the repository with `--recursive`. Missing submodules will cause build errors.
+- `Constants.Secret.cs` exists at `Unigram/Telegram/Constants.Secret.cs` with valid API credentials.
+- You applied `Libraries\vcpkg.patch` before installing any vcpkg packages.
+- The FFmpeg `portfile.cmake` was edited **before** running `vcpkg install`.
+- vcpkg integration was run with `./vcpkg.exe integrate install`.
